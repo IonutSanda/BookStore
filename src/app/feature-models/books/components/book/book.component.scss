@@ -1,0 +1,17 @@
+.book_card{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 300px;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    height: 100%;
+    text-shadow: 0 5px 5px rgb(0 0 0 / 10%);
+    cursor: pointer;
+}
+
+img{
+    height: 250px;
+    width: 200px;
+}
