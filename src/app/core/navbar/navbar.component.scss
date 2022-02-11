@@ -1,0 +1,70 @@
+.nav_body{
+    background-color: #2b5aa6;
+}
+
+.nav_right{
+    display: flex;
+    flex-direction: row;
+    align-self: center;
+    margin-left: auto;
+    margin-right: 15px;
+}
+.nav_right>i{
+    margin: 15px;
+}
+
+.book_icon{
+    font-size: 60px;
+    margin: 5px 15px;
+    cursor: pointer;
+}
+
+.user_icon,
+.star_icon,
+.cart_icon{
+    font-size: 30px;
+    cursor: pointer;
+}
+
+.search_icon{
+    font-size: 27px;
+    margin-left: 3px;
+    cursor: pointer;
+}
+
+.nav_search_bar{
+    margin-left: auto;
+}
+.nav_search_bar>span{
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    width: 600px;
+}
+
+.search_bar{
+    height: 40%;
+    display: flex;
+    align-self: center;
+    border: none;
+    border-radius: 10px;
+    padding-left: 15px;
+    width: 100%;
+}
+
+::-webkit-input-placeholder {
+    text-align: center;
+    font-style: italic;
+ }
+ 
+//  :-moz-placeholder { /* Firefox 18- */
+//     text-align: center;  
+//  }
+ 
+//  ::-moz-placeholder {  /* Firefox 19+ */
+//     text-align: center;  
+//  }
+ 
+ :-ms-input-placeholder {  
+    text-align: center; 
+ }

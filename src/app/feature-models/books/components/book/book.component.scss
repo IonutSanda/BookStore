@@ -1,0 +1,23 @@
+.book_card{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+    outline: 1px solid gray;
+    width: 150px;
+    padding: 5px;
+    margin: 5px;
+    justify-content: center;
+    text-align: center;
+    flex: 1;
+
+}
+
+.book_title{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+img{
+    height: 100px;
+}
