@@ -8,6 +8,7 @@ import { FooterComponent } from './core/footer/footer.component';
 import { BooksListComponent } from './feature-models/books/components/books-list/books-list.component';
 import { HttpClientModule } from '@angular/common/http';
 import { BookComponent } from './feature-models/books/components/book/book.component';
+import { BookDetailsComponent } from './feature-models/books/components/book-details/book-details.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { BookComponent } from './feature-models/books/components/book/book.compo
     NavbarComponent,
     FooterComponent,
     BooksListComponent,
-    BookComponent
+    BookComponent,
+    BookDetailsComponent
   ],
   imports: [
     BrowserModule,
