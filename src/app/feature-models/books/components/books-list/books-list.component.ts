@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { BookModel } from '../../models/book.model';
 import { BookService } from '../../services/book.service';
 
 @Component({
@@ -8,7 +9,7 @@ import { BookService } from '../../services/book.service';
 })
 export class BooksListComponent implements OnInit {
 
-  booksArray: any[] = [];
+  booksArray: BookModel[] = [];
 
   constructor(private bookService: BookService) { }
 

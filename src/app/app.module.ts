@@ -9,17 +9,16 @@ import { BooksListComponent } from './feature-models/books/components/books-list
 import { HttpClientModule } from '@angular/common/http';
 import { BookComponent } from './feature-models/books/components/book/book.component';
 import { BookDetailsComponent } from './feature-models/books/components/book-details/book-details.component';
+import { BookModule } from './feature-models/books/book.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
     FooterComponent,
-    BooksListComponent,
-    BookComponent,
-    BookDetailsComponent
   ],
   imports: [
+    BookModule,
     BrowserModule,
     AppRoutingModule,
     HttpClientModule

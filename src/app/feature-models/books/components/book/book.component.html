@@ -1,3 +1,5 @@
+
+<a routerLink="/books/{{book.id}}">
 <div class="book_card">
     <div class="book_image">
         <img [src]="book.imageUrl">
@@ -6,3 +8,4 @@
     <p class="book_title"><i>{{book.title}}</i></p>
     <p class="book_price"><strong>{{book.price}} RON</strong></p>
 </div>
+</a>
