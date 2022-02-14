@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { MAIN_ENDPOINTS } from 'src/app/constants/endpoints';
 import { environment } from 'src/environments/environment';
 import { map } from 'rxjs';
+import { BookModel } from '../models/book.model';
 
 @Injectable({
   providedIn: 'root'
@@ -16,9 +17,9 @@ export class BookService {
   public getBooks(){
     const getBooksUrl = `${this.baseBookUrl}${MAIN_ENDPOINTS.json}`;
 
-    return this.http.get<{ [key: string]: any }>(getBooksUrl).pipe(
+    return this.http.get<{ [key: string]: BookModel }>(getBooksUrl).pipe(
       map((books)=>{
-        const booksArray: any[] = [];
+        const booksArray: BookModel[] = [];
         for(const key in books){
           if(books.hasOwnProperty(key)){
             booksArray.push({...books[key], id: key});
@@ -27,6 +28,12 @@ export class BookService {
         return booksArray;
       })
     );
+  }
+
+  public getBookById(bookId: string){
+    const url = `${this.baseBookUrl}/${bookId}${MAIN_ENDPOINTS.json}`;
+
+    return this.http.get<BookModel>(url)
   }
 
 }

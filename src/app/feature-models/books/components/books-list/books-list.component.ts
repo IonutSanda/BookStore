@@ -10,7 +10,7 @@ import { BookService } from '../../services/book.service';
 export class BooksListComponent implements OnInit {
 
   booksArray: BookModel[] = [];
-
+  singleBook: BookModel;
   constructor(private bookService: BookService) { }
 
   ngOnInit(): void {
@@ -18,8 +18,6 @@ export class BooksListComponent implements OnInit {
     this.bookService.getBooks().subscribe((books) => {
       this.booksArray = books;
     });
-
-    console.log(this.booksArray);
 
   }
 

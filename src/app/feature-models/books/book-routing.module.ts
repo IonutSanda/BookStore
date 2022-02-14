@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { BookDetailsComponent } from './components/book-details/book-details.component';
 import { BooksListComponent } from './components/books-list/books-list.component';
+import { BooksGuardGuard } from './services/guards/books-guard.guard';
 
 const routes: Routes = [
 
@@ -15,7 +16,8 @@ const routes: Routes = [
   },
   {
     path: ':id',
-    component: BookDetailsComponent
+    component: BookDetailsComponent,
+    canActivate: [BooksGuardGuard]
   }
 
 ];
