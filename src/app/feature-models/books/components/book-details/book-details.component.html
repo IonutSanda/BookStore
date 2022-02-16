@@ -1,14 +1,33 @@
-<div class="book">
+<ng-container *ngIf="editBook$ | async as bookAsync">
+  <div class="book">
     <div class="book_image">
-        test
+      <img [src]="bookAsync.imageUrl">
     </div>
     <div class="book_details">
-        test
-    </div>
-    <div class="book_action_buttons">
-        test
-    </div>
-    <div class="book_description">
-        test
+      <div class="book_author">
+        {{bookAsync.author | titlecase}}
+      </div>
+      <div class="book_title">
+        {{bookAsync.title | titlecase}}
+      </div>
+      <div class="book_publishingHouse">
+        <i>Publishing House: <strong>{{bookAsync.publishingHouse}}</strong></i>
+      </div>
+      <div class="book_price">
+        <i>Price: <strong>{{bookAsync.price}} RON</strong></i>
+      </div>
+      <div class="book_category">
+        <i>Category: <strong>{{bookAsync.category}}</strong></i>
+      </div>
+      <div class="book_action_buttons">
+        <button class="btn btn-primary">Edit</button>
+        <button class="btn btn-secondary">Add To Cart</button>
+      </div>
     </div>
 </div>
+      <div class="book_description">
+        <h3><strong>Description: </strong></h3>
+        <p [ngClass]="{'limitTextHeight' : isShowMore}" >{{bookAsync.description}}</p>
+        <button type="button" class="btn btn-dark" (click)="showMoreText()">{{isShowMore ? 'Show More' : 'Show Less'}}</button>
+    </div>
+</ng-container>

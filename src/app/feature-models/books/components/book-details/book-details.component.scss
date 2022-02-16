@@ -1,0 +1,77 @@
+.book{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin: 50px;
+}
+
+.book_details{
+    display: flex;
+    flex-direction: column;
+    margin-left: 50px;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.book_image>img{
+    height: 500px;
+    width: 400px;
+}
+
+.book_author{
+    font-size: x-large;
+    font-weight: bold;
+}
+
+.book_title{
+    font-size: large;
+    font-style: italic;
+}
+
+.book_action_buttons{
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    margin-top: 30px;
+}
+
+button{
+    margin: 10px;
+    width: 150px;
+    border-radius: 25px;
+}
+.btn-primary{
+    background-color: rgb(184, 57, 57);
+    border-color: rgb(184, 57, 57);
+}
+.btn-primary:hover{
+    background-color: rgb(238, 120, 120);
+    border-color: rgb(238, 120, 120);
+    color: black;
+}
+.btn-secondary{
+    background-color: rgb(91, 153, 50);
+    border-color: rgb(91, 153, 50);
+}
+.btn-secondary:hover{
+    background-color: rgb(145, 216, 113);
+    border-color: rgb(145, 216, 113);
+    color: black;
+}
+
+.book_description{
+    margin: 100px;
+    font-size: 20px;
+}
+
+.limitTextHeight {
+    height: 100px;
+    overflow: hidden;
+    background-image: -webkit-gradient(
+    linear,
+    left top,
+    left bottom,
+    color-stop(0, rgba(255, 255, 255, 0)),
+    color-stop(1, rgba(255, 255, 255, 100)));
+}
+

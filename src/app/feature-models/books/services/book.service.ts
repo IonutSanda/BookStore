@@ -33,7 +33,7 @@ export class BookService {
   public getBookById(bookId: string){
     const url = `${this.baseBookUrl}/${bookId}${MAIN_ENDPOINTS.json}`;
 
-    return this.http.get<BookModel>(url)
+    return this.http.get<BookModel>(url);
   }
 
 }
