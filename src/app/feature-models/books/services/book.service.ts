@@ -36,4 +36,14 @@ export class BookService {
     return this.http.get<BookModel>(url);
   }
 
+  public addBook(book: BookModel){
+    const url = `${this.baseBookUrl}/${MAIN_ENDPOINTS.json}`
+
+    return this.http.post<any>(url, book);
+  }
+
+  public editBooK(bookId: string, book: BookModel){
+    const updateBookUrl = `${this.baseBookUrl}/${bookId}${MAIN_ENDPOINTS.json}`;
+    return this.http.put(updateBookUrl, book);
+  }
 }

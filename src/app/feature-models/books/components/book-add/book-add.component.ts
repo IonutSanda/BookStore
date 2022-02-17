@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { BookModel } from '../../models/book.model';
+import { BookService } from '../../services/book.service';
 
 @Component({
   selector: 'app-book-add',
@@ -7,9 +9,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BookAddComponent implements OnInit {
 
-  constructor() { }
+  @Output() bookFormValues = new EventEmitter<any>();
+
+  constructor(private bookService: BookService) { }
 
   ngOnInit(): void {
+  }
+
+  addBook(book: BookModel){
+    this.bookService.addBook(book).subscribe((bookId) => {
+      this.bookFormValues.emit(bookId);
+    })
   }
 
 }

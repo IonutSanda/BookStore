@@ -1,7 +1,20 @@
+
+<!-- <ng-template> -->
+  <button class="btn-dark" (click)="openForm(template)">Add Book</button>
+<!-- </ng-template> -->
+
+<ng-template #template>
+  <div class="modal-header">
+    <h4 class="modal-title">Add new Book</h4>
+    <span class="close_button" (click)="closeForm()"></span>
+  </div>
+  <div class="modal-body">
+    <app-book-add (bookFormValues)="addBook($event)"></app-book-add>
+    <button type="button" class="btn btn-danger" (click)="closeForm()">Close</button>
+  </div>
+</ng-template>
+
 <div class="books_body">
-  <app-book 
-    *ngFor="let book of booksArray"
-    [book]="book"
-    >
+  <app-book *ngFor="let book of booksArray" [book]="book">
   </app-book>
 </div>

@@ -10,6 +10,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { BookComponent } from './feature-models/books/components/book/book.component';
 import { BookDetailsComponent } from './feature-models/books/components/book-details/book-details.component';
 import { BookModule } from './feature-models/books/book.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ReactiveFormsModule } from '@angular/forms';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 @NgModule({
   declarations: [
@@ -21,7 +24,10 @@ import { BookModule } from './feature-models/books/book.module';
     BookModule,
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule,
+    ReactiveFormsModule,
+    ModalModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

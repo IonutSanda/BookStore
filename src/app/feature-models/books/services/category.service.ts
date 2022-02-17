@@ -10,7 +10,7 @@ import { map } from 'rxjs';
 })
 export class CategoryService {
 
-  private baseBookUrl = environment.onlineBookStoreServer.databaseURL + MAIN_ENDPOINTS.books;
+  private baseBookUrl = environment.onlineBookStoreServer.databaseURL + MAIN_ENDPOINTS.categories;
 
   constructor(private http: HttpClient) { }
 
@@ -31,19 +31,20 @@ export class CategoryService {
     )
   }
 
-  public getCategoriesNames(){
+  public getCategoriesName(){
+    
     const url = `${this.baseBookUrl}${MAIN_ENDPOINTS.json}`;
 
-    return this.http.get<{[key: string]: CategoryModel}>(url).pipe(
+    return this.http.get<{ [key: string]: CategoryModel }>(url).pipe(
       map((categories) => {
-        const categoryArray: String[] = [];
-        for(const key in categoryArray){
-          if(categories.hasOwnProperty(key)){
+        const  categoryArray: String[] = [];
+        for (const key in categories) {
+          if (categories.hasOwnProperty(key)) {
             categoryArray.push(categories[key].categoryName);
           }
         }
         return categoryArray;
-      })
-    )
+      }))
+
   }
 }

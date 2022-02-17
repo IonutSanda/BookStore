@@ -7,6 +7,9 @@ import { BookComponent } from './components/book/book.component';
 import { BooksListComponent } from './components/books-list/books-list.component';
 import { BookAddComponent } from './components/book-add/book-add.component';
 import { BookEditComponent } from './components/book-edit/book-edit.component';
+import { BookFormComponent } from './components/book-form/book-form.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { TypeaheadModule } from 'ngx-bootstrap/typeahead'
 
 @NgModule({
   declarations: [
@@ -14,11 +17,14 @@ import { BookEditComponent } from './components/book-edit/book-edit.component';
     BookComponent,
     BookDetailsComponent,
     BookAddComponent,
-    BookEditComponent
+    BookEditComponent,
+    BookFormComponent
   ],
   imports: [
     CommonModule,
-    BookRoutingModule
+    BookRoutingModule,
+    ReactiveFormsModule,
+    TypeaheadModule.forRoot()
   ]
 })
 export class BookModule { }
