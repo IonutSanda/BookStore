@@ -96,7 +96,7 @@ export class BookFormComponent implements OnInit {
       reader.readAsDataURL(event.target.files[0]);
     }
     else{
-      this.imgSrc = '';
+      this.imgSrc = this.imgSrc;
     }
   }
 

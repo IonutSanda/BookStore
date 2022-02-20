@@ -34,21 +34,31 @@
     </div>
     <label for="bookPrice">Publishing House: </label>
     <div class="form-group">
-        <input formControlName="publishingHouse" name="publishingHouse" id="bookPublishingHouse" type="text" class="form-control"
-        placeholder="Publishing House" />
+      <input formControlName="publishingHouse" name="publishingHouse" id="bookPublishingHouse" type="text"
+        class="form-control" placeholder="Publishing House" />
     </div>
     <label for="bookCategory">Category: </label>
     <div class="form-group">
-        <input 
-            autocomplete="off"
-            formControlName="category"
-            name="category"
-            class="form-control"
-            placeholder="Book Category"
-            [typeahead]="categoriesName"
-            [typeaheadScrollable]="true"
-            [typeaheadOptionsInScrollableView]="8"
-        />
+      <input autocomplete="off" formControlName="category" name="category" class="form-control"
+        placeholder="Book Category" [typeahead]="categoriesName" [typeaheadScrollable]="true"
+        [typeaheadOptionsInScrollableView]="8" />
     </div>
+    <label for="bookDescription">Description: </label>
+    <div class="form-group">
+      <input formControlName="description" name="description" id="bookDescription" type="text" class="form-control"
+        placeholder="Book Description" />
+    </div>
+    <label for="bookImage">Upload an image: </label>
+    <div class="form-control">
+      <input required name="imageUrl" id="imageUrl" type="file" class="form-control" placeholder="Book Image"
+        accept="image/*" (change)="onUploadBookImage($event)" />
+      <div *ngIf="imgSrc">
+        <img class="container_book_image" [src]="imgSrc" height="100px" width="80px">
+      </div>
+    </div>
+    <hr>
+
+    <button type="button" class="btn btn-secondary" [disabled]="!isFormValid()">Add Book</button>
+    <button type="button" class="btn btn-primary" [disabled]="!isFormValid()">Edit Book</button>
   </form>
 </div>
