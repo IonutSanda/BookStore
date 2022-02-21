@@ -100,5 +100,8 @@ export class BookFormComponent implements OnInit {
     }
   }
 
+  closeForm(){
+    this.modalService.closeForm();
+  }
 
 }

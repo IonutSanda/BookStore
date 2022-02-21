@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { MAIN_ENDPOINTS } from 'src/app/constants/endpoints';
 import { environment } from 'src/environments/environment';
-import { map } from 'rxjs';
+import { map, tap } from 'rxjs/operators';
 import { BookModel } from '../models/book.model';
 
 @Injectable({
@@ -11,6 +11,8 @@ import { BookModel } from '../models/book.model';
 export class BookService {
 
   private baseBookUrl = environment.onlineBookStoreServer.databaseURL + MAIN_ENDPOINTS.books;
+
+  private bookAuthors = new Set<String>();
 
   constructor(private http: HttpClient) { }
 
@@ -45,5 +47,13 @@ export class BookService {
   public editBooK(bookId: string, book: BookModel){
     const updateBookUrl = `${this.baseBookUrl}/${bookId}${MAIN_ENDPOINTS.json}`;
     return this.http.put(updateBookUrl, book);
+  }
+
+  public getAuthors(): Set<String>{
+
+    const url = `${this.baseBookUrl}${MAIN_ENDPOINTS.json}`;
+
+    this.http.get<BookModel>(url).pipe(tap((books) => this.bookAuthors.add(books.authors)));
+    return this.bookAuthors;
   }
 }

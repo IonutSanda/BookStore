@@ -1,4 +1,4 @@
-  import { Component, OnChanges, OnInit, SimpleChanges, TemplateRef } from '@angular/core';
+import { Component, OnChanges, OnInit, SimpleChanges, TemplateRef } from '@angular/core';
 import { Observable } from 'rxjs';
 import { BookModel } from '../../models/book.model';
 import { CategoryModel } from '../../models/category';
@@ -17,12 +17,16 @@ export class BooksListComponent implements OnInit {
   singleBook: BookModel;
   categories$: Observable<CategoryModel[]> = this.categoryService.getCategories();  
   categoriesName: any[] = [];
+  categorySelectedArray: string[] = [];
+  authors = this.bookService.getAuthors();
+  authorsSelectedArray: string[] = [];
+  collapsedCategories: boolean = false;
+  collapsedAuthors: boolean = false;
+  collapsedPrice: boolean = false;
 
   constructor(private bookService: BookService, private categoryService: CategoryService, private modalService: ModalService) { }
 
   ngOnInit(): void {
-
-    console.log(this.categories$);
 
     this.bookService.getBooks().subscribe((books) => {
       this.booksArray = books;
@@ -42,6 +46,36 @@ export class BooksListComponent implements OnInit {
 
   closeForm(){
     this.modalService.closeForm();
+  }
+
+  onToggleCategories(){
+    this.collapsedCategories = !this.collapsedCategories;
+  }
+
+  onToggleAuthors(){
+    this.collapsedAuthors = !this.collapsedAuthors;
+  }
+
+  onTogglePrice(){
+    this.collapsedPrice = !this.collapsedPrice;
+  }
+
+  onPropertyCheckboxChange(event: Event, property: string){
+    const propertyEvent = event.target as HTMLInputElement;
+
+    if(propertyEvent.checked){
+      if(property === 'category'){
+        this.categorySelectedArray = [...this.categorySelectedArray, propertyEvent.value];
+      } else if (property === 'authors'){
+        this.authorsSelectedArray = [...this.authorsSelectedArray, propertyEvent.value];
+      }
+    } else {
+      if(property === 'category'){
+        this.categorySelectedArray = this.categorySelectedArray.filter((e) => e !== propertyEvent.value);
+      } else if (property === 'authors'){
+        this.authorsSelectedArray = this.authorsSelectedArray.filter((e) => e !== propertyEvent.value);
+      }
+    }
   }
 
 }

@@ -1,20 +1,64 @@
-
-<!-- <ng-template> -->
-  <button class="btn-dark" (click)="openForm(template)">Add Book</button>
-<!-- </ng-template> -->
-
-<ng-template #template>
-  <div class="modal-header">
-    <h4 class="modal-title">Add new Book</h4>
-    <span class="close_button" (click)="closeForm()"></span>
+<div class="books_list_body">
+  <div class="books_list_filters">
+    <!-- <ng-template> -->
+    <button class="btn-dark" (click)="openForm(template)">Add Book</button>
+    <div class="filter_categories">
+      <div class="filter_categories_title" (click)="onToggleCategories()">
+        Category
+        <span *ngIf="collapsedCategories; else minus">+</span>
+        <ng-template #minus>
+          <span>-</span>
+        </ng-template>
+      </div>
+      <div class="filter_categories_body" [@collapse]="collapsedCategories">
+        <ng-container *ngIf="categories$ | async as cat">
+          <ng-container *ngFor="let category of cat">
+            <div class="filter_category_checkbox">
+              <input class="filter_category_checkbox_input" type="checkbox" name="category" [value]="category.categoryName" (change)="onPropertyCheckboxChange($event, 'category')"/>
+              {{category.categoryName}}
+            </div>
+          </ng-container>
+        </ng-container>
+      </div>
+    </div>
+    <div class="filter_price">
+      <div class="filter_price_title" (click)="onTogglePrice()">
+        Price
+        <span *ngIf="collapsedPrice; else minus">+</span>
+        <ng-template #minus>
+          <span>-</span>
+        </ng-template>
+      </div>
+      
+    </div>
+    <div class="filter_authors">
+      <div class="filter_authors_title" (click)="onToggleAuthors()">
+        Authors
+        <span *ngIf="collapsedAuthors; else minus">+</span>
+        <ng-template #minus>
+          <span>-</span>
+        </ng-template>
+      </div>
+      <div class="filter_authors_checkbox" [@collapse]="collapsedAuthors">
+        <ng-container *ngFor="let author of authors">
+          <input class="filter_authors_checkbox_input" type="checkbox" name="authors" [value]="author" (change)="onPropertyCheckboxChange($event, 'authors')"/>
+          {{author}}
+        </ng-container>
+      </div>
+    </div>
+    <!-- </ng-template> -->
   </div>
-  <div class="modal-body">
-    <app-book-add (bookFormValues)="addBook($event)"></app-book-add>
-    <button type="button" class="btn btn-danger" (click)="closeForm()">Close</button>
-  </div>
-</ng-template>
+  <ng-template #template>
+    <div class="modal-header">
+      <h4 class="modal-title">Add new Book</h4>
+    </div>
+    <div class="modal-body">
+      <app-book-add (bookFormValues)="addBook($event)"></app-book-add>
+    </div>
+  </ng-template>
 
-<div class="books_body">
-  <app-book *ngFor="let book of booksArray" [book]="book">
-  </app-book>
+  <div class="books_body">
+    <app-book *ngFor="let book of booksArray" [book]="book">
+    </app-book>
+  </div>
 </div>

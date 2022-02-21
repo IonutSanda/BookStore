@@ -1,7 +1,26 @@
+.books_list_body{
+    display: flex;
+    flex-direction: row;
+}
+
+.books_list_filters{
+    margin-left: 20px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.filter_categories_title,
+.filter_authors_title,
+.filter_price_title{
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+}
+
 .books_body{
     display: flex;
     flex-wrap: wrap;
     height: 100%;
-    justify-content: center;
-    gap:50px;
+    justify-content: space-evenly;
 }
