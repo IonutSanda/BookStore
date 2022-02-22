@@ -5,11 +5,20 @@ import { CategoryModel } from '../../models/category';
 import { CategoryService } from '../../services/category.service';
 import { BookService } from '../../services/book.service';
 import { ModalService } from '../../services/modal.service';
+import { animate, AUTO_STYLE, state, style, transition, trigger } from '@angular/animations';
 
 @Component({
   selector: 'app-books-list',
   templateUrl: './books-list.component.html',
-  styleUrls: ['./books-list.component.scss']
+  styleUrls: ['./books-list.component.scss'],
+  animations: [
+    trigger('collapse', [
+      state('false', style({height: AUTO_STYLE, visibility: AUTO_STYLE})),
+      state('true', style({height: '0', visibility: 'hidden'})),
+      transition('false => true', animate(100 + 'ms ease-in')),
+      transition('true => false', animate(200 + 'ms ease-out'))
+    ])
+  ]
 })
 export class BooksListComponent implements OnInit {
 

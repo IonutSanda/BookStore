@@ -51,9 +51,11 @@ export class BookService {
 
   public getAuthors(): Set<String>{
 
-    const url = `${this.baseBookUrl}${MAIN_ENDPOINTS.json}`;
+    const getBooksUrl = `${this.baseBookUrl}${MAIN_ENDPOINTS.json}`;
 
-    this.http.get<BookModel>(url).pipe(tap((books) => this.bookAuthors.add(books.authors)));
+    this.http
+      .get<BookModel>(getBooksUrl)
+      .pipe(tap((books) => this.bookAuthors.add(books.authors)));
     return this.bookAuthors;
   }
 }
