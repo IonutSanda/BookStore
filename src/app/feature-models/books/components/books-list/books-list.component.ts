@@ -27,11 +27,13 @@ export class BooksListComponent implements OnInit {
   categories$: Observable<CategoryModel[]> = this.categoryService.getCategories();  
   categoriesName: any[] = [];
   categorySelectedArray: string[] = [];
-  authors = this.bookService.getAuthors();
+  booksAuthors = this.bookService.getBooksAuthors();
   authorsSelectedArray: string[] = [];
   collapsedCategories: boolean = false;
   collapsedAuthors: boolean = false;
   collapsedPrice: boolean = false;
+  priceRangeMin: number = 1;
+  priceRangeMax: number = 999;
 
   constructor(private bookService: BookService, private categoryService: CategoryService, private modalService: ModalService) { }
 
@@ -40,6 +42,7 @@ export class BooksListComponent implements OnInit {
     this.bookService.getBooks().subscribe((books) => {
       this.booksArray = books;
     });
+
   }
 
   addBook(id: any){
@@ -85,6 +88,23 @@ export class BooksListComponent implements OnInit {
         this.authorsSelectedArray = this.authorsSelectedArray.filter((e) => e !== propertyEvent.value);
       }
     }
+  }
+
+  onOrderSelected(event: Event){
+    const order = event.target as HTMLInputElement;
+    if(order.value === ''){
+      this.bookService.getBooks().subscribe((books) => {
+        this.booksArray = books;
+      })
+    }
+  }
+
+  onChangePriceRangeMinSelected(event: Event){
+    this.priceRangeMin = +(event.target as HTMLInputElement).value;
+  }
+
+  onChangePriceRangeMaxSelected(event: Event){
+    this.priceRangeMax = +(event.target as HTMLInputElement).value;
   }
 
 }

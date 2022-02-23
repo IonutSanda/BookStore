@@ -5,6 +5,7 @@
     <div class="filter_categories">
       <div class="filter_categories_title" (click)="onToggleCategories()">
         Category
+        <hr>
         <span *ngIf="collapsedCategories; else minus">+</span>
         <ng-template #minus>
           <span>-</span>
@@ -14,13 +15,15 @@
         <ng-container *ngIf="categories$ | async as cat">
           <ng-container *ngFor="let category of cat">
             <div class="filter_category_checkbox">
-              <input class="filter_category_checkbox_input" type="checkbox" name="category" [value]="category.categoryName" (change)="onPropertyCheckboxChange($event, 'category')"/>
-              {{category.categoryName}}
+              <input class="filter_category_checkbox_input" type="checkbox" name="category"
+                [value]="category.categoryName" (change)="onPropertyCheckboxChange($event, 'category')" />
+              {{category.categoryName | titlecase}}
             </div>
           </ng-container>
         </ng-container>
       </div>
     </div>
+    <br>
     <div class="filter_price">
       <div class="filter_price_title" (click)="onTogglePrice()">
         Price
@@ -29,8 +32,18 @@
           <span>-</span>
         </ng-template>
       </div>
-      
+      <div class="filter_price_body" [@collapse]="collapsedPrice">
+        <span>{{priceRangeMin}} RON - {{priceRangeMax}} RON</span>
+        <div class="filter_ranges_slider">
+          <input class="filter_price_range" type="range" value="{{priceRangeMin}}" min="0" max="999"
+            (change)="onChangePriceRangeMinSelected($event)" />
+          <input class="filter_price_range" type="range" value="{{priceRangeMax}}" min="0" max="999"
+            (change)="onChangePriceRangeMaxSelected($event)" />
+        </div>
+      </div>
     </div>
+
+    <br>
     <div class="filter_authors">
       <div class="filter_authors_title" (click)="onToggleAuthors()">
         Authors
@@ -39,15 +52,33 @@
           <span>-</span>
         </ng-template>
       </div>
-      <div class="filter_authors_checkbox" [@collapse]="collapsedAuthors">
-        <ng-container *ngFor="let author of authors">
-          <input class="filter_authors_checkbox_input" type="checkbox" name="authors" [value]="author" (change)="onPropertyCheckboxChange($event, 'authors')"/>
-          {{author}}
+      <div class="filter_authors_body" [@collapse]="collapsedAuthors">
+        <ng-container *ngFor="let author of booksAuthors">
+          <div class="filter_authors_checkbox">
+            <input class="filter_authors_checkbox_input" type="checkbox" name="authors" [value]="author"
+              (change)="onPropertyCheckboxChange($event, 'authors')" />
+            {{author}}
+          </div>
         </ng-container>
       </div>
+      <div class="filter_authors_checkbox" [@collapse]="collapsedAuthors">
+      </div>
     </div>
-    <!-- </ng-template> -->
+
+    <br>
+    <div class="filter_sort">
+      <label for="priceSelector" class="filter_sort_title">
+        Sort By:
+      </label>
+      <select class="form-control" id="priceSelector" placeholder="Featured" #order
+        (change)="onOrderSelected($event)">
+        <option value="" selected>Featured</option>
+        <option value="asc">Low to High</option>
+        <option value="desc">High to Low</option>
+      </select>
+    </div>
   </div>
+
   <ng-template #template>
     <div class="modal-header">
       <h4 class="modal-title">Add new Book</h4>
@@ -58,7 +89,14 @@
   </ng-template>
 
   <div class="books_body">
-    <app-book *ngFor="let book of booksArray" [book]="book">
+    <app-book *ngFor="let book of booksArray 
+          | filter 
+            : categorySelectedArray
+            : authorsSelectedArray
+            : priceRangeMin
+            : priceRangeMax
+          | orderBy: order.value: 'price'
+            " [book]="book">
     </app-book>
   </div>
 </div>

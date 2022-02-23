@@ -1,26 +1,82 @@
-.books_list_body{
-    display: flex;
-    flex-direction: row;
+.books_list_body {
+  display: flex;
+  flex-direction: row;
 }
 
-.books_list_filters{
-    margin-left: 20px;
-    display: flex;
-    flex-direction: column;
-    width: 100%;
+.books_list_filters {
+  margin-left: 20px;
+  display: flex;
+  flex-direction: column;
+  max-width: 250px;
+  color: rgb(44, 100, 187);
 }
 
 .filter_categories_title,
 .filter_authors_title,
-.filter_price_title{
-    cursor: pointer;
-    display: flex;
-    justify-content: space-between;
+.filter_price_title {
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+  border-bottom: 1px solid rgba(44, 100, 187, 0.3);
 }
 
-.books_body{
-    display: flex;
-    flex-wrap: wrap;
-    height: 100%;
-    justify-content: space-evenly;
+.filter_categories_body,
+.filter_authors_body{
+    max-height: 250px;
+    overflow: auto;
+}
+
+.filter_categories_body,
+.filter_authors_body{
+    &::-webkit-scrollbar {
+        width: 15px;
+      }
+
+      &::-webkit-scrollbar-track {
+        box-shadow: inset 0 0 5px grey;
+        border-radius: 10px;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background: lightblue;
+        border-radius: 10px;
+      }
+
+      &::-webkit-scrollbar-thumb:hover {
+        background: lightblue;
+      }
+}
+
+
+.filter_price_body span {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.filter_ranges_slider {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.filter_price_range::-webkit-slider-runnable-track {
+    background: lightblue;
+    border-radius: 10px;
+}
+
+.books_body {
+  display: flex;
+  flex-wrap: wrap;
+  height: 100%;
+  justify-content: space-evenly;
+}
+
+.filter_sort .form-control{
+  color:rgb(44, 100, 187);
+  
+  &:-moz-placeholder{
+    color:rgb(44, 100, 187);
+  }
 }

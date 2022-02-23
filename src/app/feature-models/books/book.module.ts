@@ -9,7 +9,9 @@ import { BookAddComponent } from './components/book-add/book-add.component';
 import { BookEditComponent } from './components/book-edit/book-edit.component';
 import { BookFormComponent } from './components/book-form/book-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { TypeaheadModule } from 'ngx-bootstrap/typeahead'
+import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
+import { FilterPipe } from './services/pipes/filter.pipe';
+import { OrderByPipe } from './services/pipes/order-by.pipe'
 
 @NgModule({
   declarations: [
@@ -18,7 +20,9 @@ import { TypeaheadModule } from 'ngx-bootstrap/typeahead'
     BookDetailsComponent,
     BookAddComponent,
     BookEditComponent,
-    BookFormComponent
+    BookFormComponent,
+    FilterPipe,
+    OrderByPipe
   ],
   imports: [
     CommonModule,

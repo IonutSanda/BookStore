@@ -25,11 +25,21 @@ export class BookService {
         for(const key in books){
           if(books.hasOwnProperty(key)){
             booksArray.push({...books[key], id: key});
+            this.bookAuthors.add(books[key].author);
           }
         }
         return booksArray;
       })
     );
+  }
+
+  public getBooksAuthors(): Set<String> {
+    const getBooksUrl = `${this.baseBookUrl}${MAIN_ENDPOINTS.json}`;
+    this.http
+      .get<BookModel>(getBooksUrl)
+      .pipe(tap((books) => this.bookAuthors.add(books.author)));
+
+    return this.bookAuthors;
   }
 
   public getBookById(bookId: string){
@@ -39,7 +49,7 @@ export class BookService {
   }
 
   public addBook(book: BookModel){
-    const url = `${this.baseBookUrl}/${MAIN_ENDPOINTS.json}`
+    const url = `${this.baseBookUrl}/${MAIN_ENDPOINTS.json}`;
 
     return this.http.post<any>(url, book);
   }
@@ -47,15 +57,5 @@ export class BookService {
   public editBooK(bookId: string, book: BookModel){
     const updateBookUrl = `${this.baseBookUrl}/${bookId}${MAIN_ENDPOINTS.json}`;
     return this.http.put(updateBookUrl, book);
-  }
-
-  public getAuthors(): Set<String>{
-
-    const getBooksUrl = `${this.baseBookUrl}${MAIN_ENDPOINTS.json}`;
-
-    this.http
-      .get<BookModel>(getBooksUrl)
-      .pipe(tap((books) => this.bookAuthors.add(books.authors)));
-    return this.bookAuthors;
   }
 }
