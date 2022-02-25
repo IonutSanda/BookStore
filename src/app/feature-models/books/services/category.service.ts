@@ -12,7 +12,7 @@ export class CategoryService {
 
   private baseBookUrl = environment.onlineBookStoreServer.databaseURL + MAIN_ENDPOINTS.categories;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   public getCategories(){
 

@@ -14,7 +14,7 @@ export class BookService {
 
   private bookAuthors = new Set<String>();
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   public getBooks(){
     const getBooksUrl = `${this.baseBookUrl}${MAIN_ENDPOINTS.json}`;
@@ -50,11 +50,17 @@ export class BookService {
 
   public addBook(book: BookModel){
     const url = `${this.baseBookUrl}/${MAIN_ENDPOINTS.json}`;
-
+    
     return this.http.post<any>(url, book);
   }
+  
+  public deleteBook(bookId: string){
+    const deleteBookurl = `${this.baseBookUrl}/${bookId}${MAIN_ENDPOINTS.json}`;
 
-  public editBooK(bookId: string, book: BookModel){
+    return this.http.delete<any>(deleteBookurl);
+  }
+
+  public editBook(bookId: string, book: BookModel){
     const updateBookUrl = `${this.baseBookUrl}/${bookId}${MAIN_ENDPOINTS.json}`;
     return this.http.put(updateBookUrl, book);
   }

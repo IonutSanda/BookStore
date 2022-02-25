@@ -1,11 +1,12 @@
 import { Component, OnChanges, OnInit, SimpleChanges, TemplateRef } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { BookModel } from '../../models/book.model';
 import { CategoryModel } from '../../models/category';
 import { CategoryService } from '../../services/category.service';
 import { BookService } from '../../services/book.service';
 import { ModalService } from '../../services/modal.service';
 import { animate, AUTO_STYLE, state, style, transition, trigger } from '@angular/animations';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-books-list',
@@ -24,8 +25,8 @@ export class BooksListComponent implements OnInit {
 
   booksArray: BookModel[] = [];
   singleBook: BookModel;
-  categories$: Observable<CategoryModel[]> = this.categoryService.getCategories();  
   categoriesName: any[] = [];
+  categories$: Observable<CategoryModel[]> = this.categoryService.getCategories();
   categorySelectedArray: string[] = [];
   booksAuthors = this.bookService.getBooksAuthors();
   authorsSelectedArray: string[] = [];
@@ -35,14 +36,15 @@ export class BooksListComponent implements OnInit {
   priceRangeMin: number = 1;
   priceRangeMax: number = 999;
 
-  constructor(private bookService: BookService, private categoryService: CategoryService, private modalService: ModalService) { }
+  constructor(private bookService: BookService, private categoryService: CategoryService, private modalService: ModalService, private router: Router) { 
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;    
+  }
 
   ngOnInit(): void {
 
     this.bookService.getBooks().subscribe((books) => {
       this.booksArray = books;
     });
-
   }
 
   addBook(id: any){

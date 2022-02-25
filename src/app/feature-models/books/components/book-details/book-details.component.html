@@ -20,14 +20,30 @@
         <i>Category: <strong>{{bookAsync.category}}</strong></i>
       </div>
       <div class="book_action_buttons">
-        <button class="btn btn-primary">Edit</button>
+        <button class="btn btn-primary" (click)="setCurrentBook(bookAsync)">Edit</button>
         <button class="btn btn-secondary">Add To Cart</button>
+        <button class="btn btn-secondary" (click)="onDeleteBook()">Delete</button>
       </div>
     </div>
-</div>
-      <div class="book_description">
-        <h3><strong>Description: </strong></h3>
-        <p [ngClass]="{'limitTextHeight' : isShowMore}" >{{bookAsync.description}}</p>
-        <button type="button" class="btn btn-dark" (click)="showMoreText()">{{isShowMore ? 'Show More' : 'Show Less'}}</button>
+  </div>
+  <div class="book_description">
+    <h3><strong>Description: </strong></h3>
+    <p [ngClass]="{'limitTextHeight' : isShowMore}">{{bookAsync.description}}</p>
+    <button type="button" class="btn btn-dark"
+      (click)="showMoreText()">{{isShowMore ? 'Show More' : 'Show Less'}}</button>
+  </div>
+
+  <ng-template #editBookModal>
+    <div class="modal_header">
+      <h4 class="modal_title">Edit Book</h4>
     </div>
+    <div class="modal_body">
+      <span>
+      <app-book-edit >
+      </app-book-edit>
+      <button type="button" class="btn btn-danger">Cancel</button>
+    </span>
+    </div>
+  </ng-template>
+
 </ng-container>

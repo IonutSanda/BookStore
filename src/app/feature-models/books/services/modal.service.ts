@@ -41,7 +41,7 @@ export class ModalService {
   }
 
   updatebook(bookId: string, book: BookModel){
-    this.bookService.editBooK(bookId, book).subscribe((data) => {
+    this.bookService.editBook(bookId, book).subscribe((data) => {
       this.editBookService.setEditBook(book);
     })
   }

@@ -1,3 +1,4 @@
+import { ThisReceiver } from '@angular/compiler';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, switchMap, map } from 'rxjs';
@@ -5,6 +6,7 @@ import { BookModule } from '../../book.module';
 import { BookModel } from '../../models/book.model';
 import { BookService } from '../../services/book.service';
 import { EditBookService } from '../../services/edit-book.service';
+import { ModalService } from '../../services/modal.service';
 
 @Component({
   selector: 'app-book-details',
@@ -23,8 +25,9 @@ export class BookDetailsComponent implements OnInit {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private service: BookService,
-    private editBookService: EditBookService
+    private bookService: BookService,
+    private editBookService: EditBookService,
+    private modalService: ModalService
   ) { }
 
   ngOnInit(): void {
@@ -35,7 +38,7 @@ export class BookDetailsComponent implements OnInit {
       .pipe(
         switchMap((param) => {
           this.productId = param.id;
-          return this.service.getBookById(param.id);
+          return this.bookService.getBookById(param.id);
         })
       )
       .subscribe((book) => {
@@ -49,6 +52,14 @@ export class BookDetailsComponent implements OnInit {
 
   showMoreText(){
     this.isShowMore = !this.isShowMore;
+  }
+
+  onDeleteBook(){
+    this.bookService.deleteBook(this.productId).subscribe(() => this.router.navigate(['books']));
+  }
+
+  setCurrentBook(book: BookModel){
+    this.modalService.setBook(book);
   }
 
 }
