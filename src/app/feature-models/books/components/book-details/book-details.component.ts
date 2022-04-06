@@ -1,5 +1,5 @@
 import { ThisReceiver } from '@angular/compiler';
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, switchMap, map } from 'rxjs';
 import { BookModule } from '../../book.module';
@@ -19,8 +19,15 @@ export class BookDetailsComponent implements OnInit {
   productId:string;
   editBook: BookModel;
   editBook$: Observable<BookModel>;
-  book: any;
+  editedBookFromForm$: Observable<BookModel>;
+  book: BookModel;
   isShowMore: boolean = true;
+  currentBook: BookModel;
+  isEditMobile: boolean = false;
+  
+  //Change to observables and create them as async in html
+  isMobile$: boolean = true;
+  authSource$: boolean = false;
 
   constructor(
     private router: Router,
@@ -47,6 +54,7 @@ export class BookDetailsComponent implements OnInit {
       });
       
       this.editBook$ = this.editBookService.getEditBook();
+      this.editedBookFromForm$ = this.modalService.bookBehaviorSubject$;
 
   }
 
@@ -60,6 +68,35 @@ export class BookDetailsComponent implements OnInit {
 
   setCurrentBook(book: BookModel){
     this.modalService.setBook(book);
+  }
+
+  openConfirmModal(template: TemplateRef<any>){
+    this.modalService.openConfirmModal(template);
+  }
+
+  getFormValues(data: BookModel){
+    this.currentBook = data;
+  }
+
+  setEditFormValues(newBook: BookModel){
+    this.modalService.setBook(newBook);
+  }
+
+  submit(book: BookModel){
+    this.modalService.closeConfirmModal();
+    this.modalService.updatebook(this.productId,book);
+  }
+
+  openForm(template: TemplateRef<any>){
+    this.modalService.openForm(template);
+  }
+
+  closeForm(){
+    this.modalService.closeForm();
+  }
+
+  closeConfirmModal(){
+    this.modalService.closeConfirmModal();
   }
 
 }

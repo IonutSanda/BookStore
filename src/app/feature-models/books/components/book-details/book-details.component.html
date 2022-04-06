@@ -1,49 +1,84 @@
-<ng-container *ngIf="editBook$ | async as bookAsync">
-  <div class="book">
-    <div class="book_image">
-      <img [src]="bookAsync.imageUrl">
+<ng-template [ngIf]="!isEditMobile">
+  <ng-container *ngIf="editBook$ | async as bookAsync">
+    <div class="book">
+      <div class="book_image">
+        <img [src]="bookAsync.imageUrl">
+      </div>
+      <div class="book_details">
+        <div class="book_author">
+          {{bookAsync.author | titlecase}}
+        </div>
+        <div class="book_title">
+          {{bookAsync.title | titlecase}}
+        </div>
+        <div class="book_publishingHouse">
+          <i>Publishing House: <strong>{{bookAsync.publishingHouse}}</strong></i>
+        </div>
+        <div class="book_price">
+          <i>Price: <strong>{{bookAsync.price}} RON</strong></i>
+        </div>
+        <div class="book_category">
+          <i>Category: <strong>{{bookAsync.category}}</strong></i>
+        </div>
+        <div class="book_action_buttons">
+          <button class="btn btn-warning" type="button" *ngIf="!isMobile$; else desktopView"
+            (click)="setCurrentBook(bookAsync)">Edit</button>
+          <button class="btn btn-secondary">Add To Cart</button>
+          <button class="btn btn-primary">Add to Wishlist</button>
+          <button class="btn btn-danger" (click)="onDeleteBook()">Delete</button>
+        </div>
+      </div>
     </div>
-    <div class="book_details">
-      <div class="book_author">
-        {{bookAsync.author | titlecase}}
-      </div>
-      <div class="book_title">
-        {{bookAsync.title | titlecase}}
-      </div>
-      <div class="book_publishingHouse">
-        <i>Publishing House: <strong>{{bookAsync.publishingHouse}}</strong></i>
-      </div>
-      <div class="book_price">
-        <i>Price: <strong>{{bookAsync.price}} RON</strong></i>
-      </div>
-      <div class="book_category">
-        <i>Category: <strong>{{bookAsync.category}}</strong></i>
-      </div>
-      <div class="book_action_buttons">
-        <button class="btn btn-primary" (click)="setCurrentBook(bookAsync)">Edit</button>
-        <button class="btn btn-secondary">Add To Cart</button>
-        <button class="btn btn-secondary" (click)="onDeleteBook()">Delete</button>
-      </div>
-    </div>
-  </div>
-  <div class="book_description">
-    <h3><strong>Description: </strong></h3>
-    <p [ngClass]="{'limitTextHeight' : isShowMore}">{{bookAsync.description}}</p>
-    <button type="button" class="btn btn-dark"
-      (click)="showMoreText()">{{isShowMore ? 'Show More' : 'Show Less'}}</button>
-  </div>
 
-  <ng-template #editBookModal>
-    <div class="modal_header">
-      <h4 class="modal_title">Edit Book</h4>
+    <ng-template #desktopView [ngIf]="authSource$">
+      <button class="btn btn-warning" (click)="openForm(editBookModal); setEditFormValues(bookAsync)"
+        #openModal>Edit</button>
+
+      <ng-template #editBookModal>
+        <div class="modal_header">
+          <h4 class="modal_title">Edit Book</h4>
+        </div>
+        <div class="modal_body">
+          <span>
+            <app-book-edit *ngIf="editedBookFromForm$ | async as editedBookAsync" [book]="editedBookAsync"
+              (onEmitValues)="openConfirmModal(confirmModal); getFormValues($event)">
+            </app-book-edit>
+            <!-- <button type="button" class="btn btn-danger" (click)="closeForm()">Cancel</button> -->
+          </span>
+        </div>
+      </ng-template>
+
+      <ng-template #confirmModal>
+        <div class="modal_body">
+          <p>Are you sure you want to edit this book?</p>
+          <label for="save-form" class="btn btn-default" (click)="submit(currentBook)">Yes</label>
+          <button type="button" class="btn btn-primary"
+            (click)="openForm(editBookModal);closeConfirmModal()">No</button>
+        </div>
+      </ng-template>
+    </ng-template>
+
+
+    <div class="book_description">
+      <h3><strong>Description: </strong></h3>
+      <p [ngClass]="{'limitTextHeight' : isShowMore}">{{bookAsync.description}}</p>
+      <button type="button" class="btn btn-dark"
+        (click)="showMoreText()">{{isShowMore ? 'Show More' : 'Show Less'}}</button>
     </div>
+  </ng-container>
+</ng-template>
+
+<ng-template [ngIf]="isEditMobile">
+  <app-book-edit *ngIf="editedBookFromForm$ | async as editedBookAsync" [book]="editedBookAsync"
+    (onEmitValues)="openConfirmModal(confirmModalMobile);getFormValues($event)"></app-book-edit>
+  <!-- <button type="button" class="btn btn-danger" (click)="isEditMobile = false">Back</button> -->
+
+  <ng-template #confirmModalMobile>
     <div class="modal_body">
-      <span>
-      <app-book-edit >
-      </app-book-edit>
-      <button type="button" class="btn btn-danger">Cancel</button>
-    </span>
+      <p>Are you sure you want to edit this book?</p>
+      <label for="save-form" class="btn btn-default" (click)="submit(currentBook)">Yes</label>
+      <button type="button" class="btn btn-primary"
+        (click)="closeConfirmModal()">No</button>
     </div>
   </ng-template>
-
-</ng-container>
+</ng-template>

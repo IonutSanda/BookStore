@@ -20,7 +20,7 @@ export class BookFormComponent implements OnInit {
   imgSrc: any = '';
 
   @Input() book: BookModel;
-  @Output() onSubmit = new EventEmitter;
+  @Output() onSubmit = new EventEmitter();
   @Output() onEmitValues = new EventEmitter();
 
   constructor(private route: ActivatedRoute, private modalService: ModalService, private categoryService: CategoryService) { }

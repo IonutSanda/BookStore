@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { BookModel } from '../../models/book.model';
 import { BookService } from '../../services/book.service';
 import { EditBookService } from '../../services/edit-book.service';
@@ -9,13 +10,15 @@ import { EditBookService } from '../../services/edit-book.service';
   styleUrls: ['./book-edit.component.scss']
 })
 export class BookEditComponent implements OnInit {
-
-  constructor(private bookService: BookService, private editBookService: EditBookService) { }
-
   @Input() book: BookModel;
   @Output() onEmitValues = new EventEmitter();
 
   private bookId: string;
+
+  constructor(private bookService: BookService, private editBookService: EditBookService, private route: ActivatedRoute) {
+    this.bookId = this.route.snapshot.params.id;
+   }
+
 
   ngOnInit(): void {
   }
