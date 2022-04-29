@@ -58,8 +58,8 @@
     </div>
     <hr>
     <div class="modal_footer">
-      <button type="submit" class="btn btn-secondary" [disabled]="!isFormValid()">Add Book</button>
-      <button type="button" class="btn btn-primary" [disabled]="!isFormValid()">Edit Book</button>
+      <button type="submit" class="btn btn-secondary" [disabled]="!isFormValid()" *ngIf="isAddMode">Add Book</button>
+      <button type="submit" class="btn btn-primary" [disabled]="!isFormValid()" (click)="closeForm()" *ngIf="!isAddMode">Edit Book</button>
       <button type="button" class="btn btn-danger" (click)="closeForm()">Close</button>
     </div>
   </form>

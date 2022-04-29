@@ -23,8 +23,7 @@ export class BookDetailsComponent implements OnInit {
   book: BookModel;
   isShowMore: boolean = true;
   currentBook: BookModel;
-  isEditMobile: boolean = false;
-  
+  isEditMobile: boolean = false;  
   //Change to observables and create them as async in html
   isMobile$: boolean = true;
   authSource$: boolean = false;
