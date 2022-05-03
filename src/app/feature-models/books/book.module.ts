@@ -12,6 +12,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
 import { FilterPipe } from './services/pipes/filter.pipe';
 import { OrderByPipe } from './services/pipes/order-by.pipe'
+import { BookLoaderComponent } from 'src/app/shared/components/book-loader/book-loader.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { OrderByPipe } from './services/pipes/order-by.pipe'
     BookAddComponent,
     BookEditComponent,
     BookFormComponent,
+    BookLoaderComponent,
     FilterPipe,
     OrderByPipe
   ],

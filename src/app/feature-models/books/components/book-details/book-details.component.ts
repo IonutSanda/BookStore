@@ -2,6 +2,7 @@ import { ThisReceiver } from '@angular/compiler';
 import { Component, ElementRef, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, switchMap, map } from 'rxjs';
+import { BookLoadingService } from 'src/app/core/services/utility/book-loading.service';
 import { BookModule } from '../../book.module';
 import { BookModel } from '../../models/book.model';
 import { BookService } from '../../services/book.service';
@@ -27,18 +28,23 @@ export class BookDetailsComponent implements OnInit {
   //Change to observables and create them as async in html
   isMobile$: boolean = true;
   authSource$: boolean = false;
+  isLoadingData$: Observable<boolean>;
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
     private bookService: BookService,
     private editBookService: EditBookService,
-    private modalService: ModalService
+    private modalService: ModalService,
+    private bookLoadingService: BookLoadingService
   ) { }
 
   ngOnInit(): void {
 
     this.productId = this.route.snapshot.params.id
+
+    this.bookLoadingService.show();
+    this.isLoadingData$ = this.bookLoadingService.loading$;
 
     this.route.params
       .pipe(
@@ -50,6 +56,7 @@ export class BookDetailsComponent implements OnInit {
       .subscribe((book) => {
         this.book = book;
         this.editBookService.setEditBook(book);
+        this.bookLoadingService.hide();
       });
       
       this.editBook$ = this.editBookService.getEditBook();

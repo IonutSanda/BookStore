@@ -1,3 +1,7 @@
+<div class="spinner-wrapper" *ngIf="isLoadingData$ | async">
+  <app-book-loader></app-book-loader>
+</div>
+
 <ng-template [ngIf]="!isEditMobile">
   <ng-container *ngIf="editBook$ | async as bookAsync">
     <div class="book">

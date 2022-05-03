@@ -13,6 +13,7 @@ import { BookModule } from './feature-models/books/book.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { ShoppingCartModule } from './feature-models/books/services/popover-services/shopping-cart.module';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
   ],
   imports: [
     BookModule,
+    ShoppingCartModule,
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,

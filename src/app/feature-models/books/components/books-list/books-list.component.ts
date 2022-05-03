@@ -7,6 +7,8 @@ import { BookService } from '../../services/book.service';
 import { ModalService } from '../../services/modal.service';
 import { animate, AUTO_STYLE, state, style, transition, trigger } from '@angular/animations';
 import { Router } from '@angular/router';
+import { AddBookService } from '../../services/add-book.service';
+import { BookLoadingService } from 'src/app/core/services/utility/book-loading.service';
 
 @Component({
   selector: 'app-books-list',
@@ -35,19 +37,28 @@ export class BooksListComponent implements OnInit {
   collapsedPrice: boolean = false;
   priceRangeMin: number = 1;
   priceRangeMax: number = 999;
+  isLoadingData$: Observable<boolean>;
 
-  constructor(private bookService: BookService, private categoryService: CategoryService, private modalService: ModalService, private router: Router) { 
+  constructor(private bookService: BookService, private categoryService: CategoryService, private modalService: ModalService, private router: Router, private addedBookService: AddBookService, private bookLoadingService: BookLoadingService) { 
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;    
   }
 
   ngOnInit(): void {
+    this.bookLoadingService.show();
+
+    this.isLoadingData$ = this.bookLoadingService.loading$;
+    this.addedBookService.addedBookAction$.subscribe((data) => {
+      this.booksArray.push(data);
+    })
 
     this.bookService.getBooks().subscribe((books) => {
       this.booksArray = books;
+      this.bookLoadingService.hide();
     });
   }
 
   addBook(id: any){
+    
     this.modalService.closeForm();
     this.bookService.getBookById(id.name).subscribe((book) => {
       this.booksArray = [...this.booksArray, book];
