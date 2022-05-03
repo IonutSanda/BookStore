@@ -5,7 +5,6 @@ import { ShoppingCartRoutingModule } from './shopping-cart-routing.module';
 import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
 import { CartItemComponent } from './cart-item/cart-item.component';
 import { WishlistPopoverComponent } from './components/wishlist-popover/wishlist-popover.component';
-import { BookDetailsComponent } from '../../components/book-details/book-details.component';
 import { BookCartPopoverComponent } from './components/book-cart-popover/book-cart-popover.component';
 
 

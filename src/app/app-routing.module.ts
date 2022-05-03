@@ -5,8 +5,14 @@ const routes: Routes = [
 
   {
     path: 'books',
-    loadChildren: () => import('./feature-models/books/book.module').then((m) => m.BookModule)
-  }
+    loadChildren: () =>
+      import('./feature-models/books/book.module').then((m) => m.BookModule),
+  },
+  {
+    path: 'shoppingcart',
+    loadChildren: () =>
+      import('./feature-models/books/services/popover-services/shopping-cart.module').then((m) => m.ShoppingCartModule),
+  },
 
 ];
 
