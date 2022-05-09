@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { BookModel } from 'src/app/feature-models/books/models/book.model';
 
 @Component({
   selector: 'app-book-cart-popover',
@@ -7,9 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BookCartPopoverComponent implements OnInit {
 
+  @Input() book: BookModel;
+  @Output() deleteBook = new EventEmitter<BookModel>();
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  emitBook(){
+    this.deleteBook.emit(this.book);
   }
 
 }
