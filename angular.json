@@ -110,6 +110,16 @@
             ],
             "scripts": []
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {
+            "prerender": false,
+            "ssr": false,
+            "browserTarget": "online_bookstore:build:production",
+            "firebaseProject": "online-book-store-a405d",
+            "firebaseHostingSite": "online-book-store-a405d"
+          }
         }
       }
     }

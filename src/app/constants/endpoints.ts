@@ -1,3 +1,4 @@
+import { environment } from "src/environments/environment";
 
 export const MAIN_ENDPOINTS = {
     books: '/books',
@@ -6,5 +7,7 @@ export const MAIN_ENDPOINTS = {
     users: '/users',
     ratings: '/ratings',
     role: '/role',
-    json: '.json'
+    json: '.json',
+    login: 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithCustomToken?key=' + environment.firebase.apiKey,
+    userData: 'https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=' + environment.firebase.apiKey
 }
