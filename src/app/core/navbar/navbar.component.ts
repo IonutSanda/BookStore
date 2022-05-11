@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/feature-models/auth/services/auth.service';
+import { WishlistService } from 'src/app/feature-models/books/services/popover-services/services/wishlist.service';
 
 @Component({
   selector: 'app-navbar',
@@ -7,9 +9,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavbarComponent implements OnInit {
 
-  constructor() { }
+  isActivatedAccountMenu = false;
+  isAuthenticated = false;
+
+  constructor(private wishlistSerivce: WishlistService, private authService: AuthService) { }
 
   ngOnInit(): void {
+  }
+
+  toggleAccountMenu(){
+    this.isActivatedAccountMenu = !this.isActivatedAccountMenu;
+  }
+
+  onLogout(){
+    this.wishlistSerivce.clearWishlist();
+    this.authService.logout();
   }
 
 }

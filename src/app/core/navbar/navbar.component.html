@@ -12,11 +12,34 @@
       </span>
     </div>
     <div class="nav nav_right">
-      <i class="fas fa fa-user user_icon"></i>
+      <div (appClickOutside)="isActivatedAccountMenu = false" (click)="toggleAccountMenu()" class="nav-account-icon">
+        <span class="user-account" [ngClass]="{active: isActivatedAccountMenu}"><i class="fas fa fa-user user_icon"></i></span>
+      </div>
       <i class="fas fa fa-star star_icon"></i>
       <a routerLink="/shoppingcart/shoppingcart">
         <i class="fas fa fa-shopping-cart cart_icon"></i>
       </a>
     </div>
+  </div>
+
+  <div *ngIf="isActivatedAccountMenu" class="nav-account-menu">
+    <div class="arrow"></div>
+    <ul class="nav-account-menu-list">
+      <li class="nav-list">
+        <i class="fa-solid fa-user"></i>
+      </li>
+      <a class="link" routerLink="/auth/login" (click)="toggleAccountMenu()" *ngIf="!isAuthenticated">
+        <li class="nav-account-menu-list-login">Log in</li>
+      </a>
+      <a class="link" routerLink="/auth/register" (click)="toggleAccountMenu()" *ngIf="!isAuthenticated">
+        <li class="nav-account-menu-list-register">Register</li>
+      </a>
+      <a class="link" (click)="toggleAccountMenu()" *ngIf="isAuthenticated">
+        <li class="nav-account-menu-login">Profile</li>
+      </a>
+      <a class="link" (click)="toggleAccountMenu()" *ngIf="isAuthenticated">
+        <li class="nav-account-menu-login" (click)="onLogout()">Logout</li>
+      </a>
+    </ul>
   </div>
 </nav>

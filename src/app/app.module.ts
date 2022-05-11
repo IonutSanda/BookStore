@@ -17,15 +17,19 @@ import { ShoppingCartModule } from './feature-models/books/services/popover-serv
 import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
 import { provideAnalytics,getAnalytics,ScreenTrackingService,UserTrackingService } from '@angular/fire/analytics';
-import { provideAuth,getAuth } from '@angular/fire/auth';
+import { provideAuth,getAuth, AuthModule } from '@angular/fire/auth';
 import { provideDatabase,getDatabase } from '@angular/fire/database';
 import { provideFirestore,getFirestore } from '@angular/fire/firestore';
+import { AngularFireAuth, AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { AngularFireModule } from '@angular/fire/compat';
+import { ClickOutsideDirective } from './core/navbar/directives/click-outside.directive';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
     FooterComponent,
+    ClickOutsideDirective,
   ],
   imports: [
     BookModule,
@@ -36,11 +40,14 @@ import { provideFirestore,getFirestore } from '@angular/fire/firestore';
     BrowserAnimationsModule,
     ReactiveFormsModule,
     ModalModule.forRoot(),
-    provideFirebaseApp(() => initializeApp(environment.firebase)),
-    provideAnalytics(() => getAnalytics()),
-    provideAuth(() => getAuth()),
-    provideDatabase(() => getDatabase()),
-    provideFirestore(() => getFirestore())
+    AuthModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireAuthModule
+    // provideFirebaseApp(() => initializeApp(environment.firebase)),
+    // provideAnalytics(() => getAnalytics()),
+    // provideAuth(() => getAuth()),
+    // provideDatabase(() => getDatabase()),
+    // provideFirestore(() => getFirestore())
   ],
   providers: [
     ScreenTrackingService,UserTrackingService

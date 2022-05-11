@@ -8,10 +8,8 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
 import { AuthResponseModel } from '../models/auth-response-model';
 import { tap, map, switchMap } from 'rxjs/operators';
-import { mainModule } from 'process';
 import { roles } from 'src/app/constants/roles';
 import { RegisterDataModel } from '../models/register-model';
-import { async } from '@firebase/util';
 
 @Injectable({
   providedIn: 'root'

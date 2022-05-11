@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
-import { Observable, take, map } from 'rxjs';
+import { Observable, map } from 'rxjs';
+import { roles } from 'src/app/constants/roles';
 import { AuthService } from '../../auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuthGuard implements CanActivate {
+export class RoleGuard implements CanActivate {
 
   constructor(private authService: AuthService, private router: Router){}
 
@@ -14,12 +15,11 @@ export class AuthGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     return this.authService.users$.pipe(
-      take(1),
-      map(user => {
-        const isAuth = !!Object.keys(user).length;
-        if(!isAuth){
+      map((user) => {
+        if(user.role === roles.ADMIN){
           return true;
         }
+        
         return this.router.createUrlTree(['/books']);
       })
     );

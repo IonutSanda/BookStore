@@ -14,6 +14,15 @@
     margin: 15px;
 }
 
+.nav-account-icon > .active{
+    color: lightblue;
+}
+
+.nav-account-icon{
+    margin: auto;
+    margin-right: 23px;
+}
+
 .book_icon{
     font-size: 60px;
     margin: 5px 15px;
@@ -57,16 +66,8 @@
     text-align: center;
     font-style: italic;
  }
- 
-//  :-moz-placeholder { /* Firefox 18- */
-//     text-align: center;  
-//  }
- 
-//  ::-moz-placeholder {  /* Firefox 19+ */
-//     text-align: center;  
-//  }
- 
- :-ms-input-placeholder {  
+
+:-ms-input-placeholder {  
     text-align: center; 
  }
 
@@ -74,4 +75,16 @@
      text-decoration: none;
      color: rgb(33, 37, 41);
      margin: 15px;
+ }
+
+ .user-account{
+     font-size: 25px;
+ }
+
+ .user-account:hover{
+     color: lightblue;
+ }
+
+ .nav-account-menu{
+
  }
