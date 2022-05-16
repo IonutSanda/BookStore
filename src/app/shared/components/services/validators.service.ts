@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { AbstractControl, FormControl } from '@angular/forms';
+import { AbstractControl, AsyncValidatorFn, FormControl } from '@angular/forms';
 import { BookLoadingService } from 'src/app/core/services/utility/book-loading.service';
 
 @Injectable({
@@ -54,7 +54,19 @@ export class ValidatorsService {
     return null;
   }
 
-  searchEmail(email: string){
-    
+  searchEmail(email: string): Promise<any>{
+    return this.afAuth.fetchSignInMethodsForEmail(email);
+  }
+
+  emailValidator(): AsyncValidatorFn{
+    return (
+      control: AbstractControl
+    ): Promise<{[key: string]:boolean} | null> => {
+      this.loadingService.show();
+      return this.searchEmail(control.value).then((res) => {
+        this.loadingService.hide();
+        return res.length > 0 ? {emailExists: true} : null;
+      })
+    }
   }
 }

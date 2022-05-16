@@ -10,7 +10,6 @@ import { AuthResponseModel } from '../models/auth-response-model';
 import { tap, map, switchMap } from 'rxjs/operators';
 import { roles } from 'src/app/constants/roles';
 import { RegisterDataModel } from '../models/register-model';
-import { notStrictEqual } from 'assert';
 
 @Injectable({
   providedIn: 'root'

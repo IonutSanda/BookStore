@@ -1,1 +1,190 @@
-<p>register works!</p>
+<div *ngIf="isLoadingData$ | async" class="spinner-wrapper">
+  <app-book-loader></app-book-loader>
+</div>
+
+<div class="container">
+  <h2 class="header-title">Create an Account</h2>
+  <br />
+  <form [formGroup]="registerForm" (ngSubmit)="submit()">
+    <label for="firstName">First Name:</label>
+    <div class="form-group input-group">
+      <input formControlName="firstName" name="firstName" id="firstName" type="text" class="form-control"
+        placeholder="First Name" [ngClass]="{
+                    'input-error':
+                    !this.registerForm.controls.firstName.valid &&
+                    this.registerForm.controls.firstName.dirty &&
+                    this.registerForm.controls.firstName.value
+                }" />
+    </div>
+    <div *ngIf="
+            !this.registerForm.controls.firstName.valid &&
+            this.registerForm.controls.firstName.dirty &&
+            this.registerForm.controls.firstName.value" class="input-invalid">
+      First Name can only contain letters!
+    </div>
+    <div *ngIf="
+            registerForm.controls.firstName.touched && 
+            registerForm.controls.firstName.value === '' " class="input-invalid">
+      Required!
+    </div>
+    <label for="lastName">Last Name:</label>
+    <div class="form-group input-group">
+      <input formControlName="lastName" name="lastName" id="lastName" type="text" class="form-control"
+        placeholder="Last Name" [ngClass]="{
+                    'input-error':
+                    !this.registerForm.controls.lastName.valid &&
+                    this.registerForm.controls.lastName.dirty &&
+                    this.registerForm.controls.lastName.value
+                }" />
+      <div *ngIf="
+            !this.registerForm.controls.lastName.valid &&
+            this.registerForm.controls.lastName.dirty &&
+            this.registerForm.controls.lastName.value" class="input-invalid">
+        Last Name can only contain letters!
+      </div>
+      <div *ngIf="
+            registerForm.controls.lastName.touched && 
+            registerForm.controls.lastName.value === '' " class="input-invalid">
+        Required!
+      </div>
+    </div>
+    <label for="email">Email:</label>
+    <div class="form-group">
+      <input formControlName="email" name="email" id="email" type="email" class="form-control" placeholder="Email"
+        [ngClass]="{
+                    'input-error':
+                    !this.registerForm.controls.email.valid &&
+                    this.registerForm.controls.email.dirty &&
+                    this.registerForm.controls.email.value
+                }" />
+      <span *ngIf="isLoadingEmail$ | async" class="input-group-text">
+        <div class="spinner-border spinner-border-sm text-secondary"></div>
+      </span>
+
+      <div *ngIf="
+            !this.registerForm.controls.email.errors?.pattern &&
+            this.registerForm.controls.email.dirty &&
+            this.registerForm.controls.email.value" class="input-invalid">
+        Please enter a valid E-mail Address!
+      </div>
+      <div *ngIf="
+            registerForm.controls.email.touched && 
+            registerForm.controls.email.value === '' " class="input-invalid">
+        Required!
+      </div>
+      <div *ngIf="this.registerForm.controls.email.errors?.emailExist" class="input-invalid">
+        Email is already in use by another account!
+      </div>
+    </div>
+    <label for="password">Password:</label>
+    <div class="form-group">
+      <input formControlName="password" name="password" id="password" type="password" class="form-control"
+        placeholder="Password" />
+    </div>
+    <div>
+      <div *ngIf="this.registerForm.controls.password.dirty" class="validators">
+        <app-svg-template [color]="this.registerForm.controls.password.errors?.minLength || 
+            this.registerForm.value.password.length === 0 ? 'red' : 'green' " height="18px" width="18px">
+        </app-svg-template>
+        <span [ngClass]="this.registerForm.controls.password.errors?.minLength || 
+                this.registerForm.value.password.length === 0 ? 'span-error-red' : 'span-error-green' ">
+          Password must be at least 8 characters long!
+        </span>
+        <br />
+        <app-svg-template [color]="this.registerForm.controls.password.errors?.hasNotNumber ? 'red' : 'green' "
+          height="18px" width="18px">
+        </app-svg-template>
+        <span
+          [ngClass]="this.registerForm.controls.password.errors?.hasNotNumber? 'span-error-red' : 'span-error-green' ">
+          Password must contain a number!
+        </span>
+        <br />
+        <app-svg-template [color]="this.registerForm.controls.password.errors?.hasNoUpperCase ? 'red' : 'green' "
+          height="18px" width="18px">
+        </app-svg-template>
+        <span
+          [ngClass]="this.registerForm.controls.password.errors?.hasNoUpperCase? 'span-error-red' : 'span-error-green' ">
+          Password must contain a upper Case Letter!
+        </span>
+        <br />
+        <app-svg-template [color]="this.registerForm.controls.password.errors?.hasNoLowerCase ? 'red' : 'green' "
+          height="18px" width="18px">
+        </app-svg-template>
+        <span
+          [ngClass]="this.registerForm.controls.password.errors?.hasNoLowerCase? 'span-error-red' : 'span-error-green' ">
+          Password must contain a lower Case Letter!
+        </span>
+        <br />
+        <app-svg-template [color]="this.registerForm.controls.password.errors?.hasNoSpecialCharacter ? 'red' : 'green' "
+          height="18px" width="18px">
+        </app-svg-template>
+        <span
+          [ngClass]="this.registerForm.controls.password.errors?.hasNoSpecialCharacter? 'span-error-red' : 'span-error-green' ">
+          Password must contain a special character!
+        </span>
+        <br />
+      </div>
+    </div>
+
+    <label for="confirmPassword">Confirm Password:</label>
+    <div class="form-group">
+      <input formControlName="confirmPassword" name="confirmPassword" id="confirmPassword" type="password"
+        class="form-control" placeholder="Confirm Password" [ngClass]="{
+                'input-error':
+                this.registerForm.controls.confirmPassword.dirty &&
+                this.registerForm.errors?.isNotMatching &&
+                this.registerForm.controls.confirmPassword.value !== ''
+            }" />
+    </div>
+    <div *ngIf="
+        this.registerForm.controls.confirmPassword.dirty &&
+        this.registerForm.errors?.isNotMatching &&
+        this.registerForm.controls.confirmPassword.value !== ''" class="input-invalid">
+        Passwords do not match!
+    </div>
+    <div *ngIf="
+        registerForm.controls.confirmPassword.touched && 
+        registerForm.controls.confirmPassword.value === '' " class="input-invalid">
+      Required!
+    </div>
+    <input 
+        name="confirmTerms"
+        id="confirmTerms"
+        type="checkbox"
+        class="form-control"
+        (change)="isAccepted = !isAccepted"
+        [disabled]="isDisabled"
+    />
+    <span>
+        <label for="confirmTerms">I agree all statements mentioned</label>
+        <a (click)="openModal(template)" class="span-terms-service-link">Terms of Service</a>
+    </span>
+    <br /><br />
+    <button class="btn btn-success btn-create-account" type="submit" [disabled]="!isValid() || this.registerForm.status === 'PENDING'">Create Account</button>
+  </form>
+  <br />
+  <span class="span-login">
+      Already have an account?
+      <a href="#" class="span-login-link">Log In</a>
+  </span>
+</div>
+<br/>
+<ng-template #template>
+    <div class="modal-header">
+        <h4 class="modal-title pull-left">Terms of service</h4>
+        <button
+            type="button"
+            class="close pull-right"
+            aria-label="Close"
+            (click)="modalRef.hide()"
+        ></button>
+    </div>
+    <div class="modal-body">
+        <p *ngFor="let item of items">
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Facere molestiae esse, commodi numquam, aperiam cumque cum saepe libero dolores aliquid quas quod nesciunt alias magni doloremque autem perferendis? Doloremque, eaque.
+        </p>
+        <div class="btn btn-danger btn-close-modal" (click)="closeModal()">
+            I have read and accept the terms and conditions.
+        </div>
+    </div>
+</ng-template>
