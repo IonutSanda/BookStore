@@ -34,10 +34,10 @@ export class WishlistService {
     const deleteBookFromWishlistUrl = `${this.baseBookUrl}/${this.userId}/wishlist${MAIN_ENDPOINTS.json}`;
     this.wishlistBooks = [...this.wishlistBooks.filter(book => book.productId != bookId)];
     this.wishlistProducts.next(this.wishlistBooks);
-    this.http.put(deleteBookFromWishlistUrl, this.wishlistBooks);
+    return this.http.put(deleteBookFromWishlistUrl, this.wishlistBooks);
   }
 
-  getBooksFromDatabase(){
+  getBooksFromDatabase(userId: string): Observable<BookModel[]>{
     const getBooksFromDatabaseUrl = `${this.baseBookUrl}/${this.userId}/wishlist${MAIN_ENDPOINTS.json}`;
     return this.http.get<BookModel[]>(getBooksFromDatabaseUrl);
   }

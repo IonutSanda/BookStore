@@ -36,6 +36,12 @@
     cursor: pointer;
 }
 
+.acount-menu-icon{
+    font-size: 70px;
+}
+
+
+
 .search_icon{
     font-size: 27px;
     margin-left: 3px;
@@ -86,5 +92,90 @@
  }
 
  .nav-account-menu{
-
+    display: table;
+    position: absolute;
+    list-style-type: none;
+    background-color: white;
+    right: 0px;
+    width: 322px;
+    border: 1px solid gray;
+    z-index: 5555;
+    padding: 10px 20px 10px 20px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
+    border-collapse: separate;
+    border-spacing: 0 5px;
+    margin-top: -45px;
  }
+
+ .nav-account-menu-link {
+    display: grid;
+    list-style-type: none;
+    padding: 0px;
+  }
+
+  .nav-account-menu-link-register {
+    font-family: "Open Sans", sans-serif;
+    list-style-type: none;
+    vertical-align: middle;
+    display: table-cell;
+    color: black;
+    border: 1.5px solid lightblue;
+    height: 30px;
+    border-radius: 20px;
+    padding: 0px;
+    margin-top: 100px;
+    margin-bottom: 5px;
+    transition: all 0.3s;
+    width: 10%;
+  }
+  
+  .nav-account-menu-link-register:hover {
+    cursor: pointer;
+    border: 1px solid rgba(111, 201, 111, 0.836);
+    background-color: rgba(111, 201, 111, 0.836);
+    color: black;
+  }
+  
+  .nav-account-menu-link-login {
+    transition: all 0.3s;
+    font-family: "Open Sans", sans-serif;
+    list-style-type: none;
+    // color: $default-icon-color;
+    background-color: lightblue;
+    border-radius: 20px;
+    height: 30px;
+    padding: 0px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    vertical-align: middle;
+    display: table-cell;
+    width: 10%;
+  }
+  
+  .nav-account-menu-link-login:hover {
+    cursor: pointer;
+    background-color: darkblue;
+    color: white;
+    // color: $default-icon-color;
+  }
+
+  .arrow {
+    height: 15px;
+    width: 15px;
+    background-color: white;
+    transform: rotate(45deg);
+    margin-top: -23px;
+    margin-left: 130px;
+    border-top: 1px solid gray;
+    border-left: 1px solid gray;
+    z-index: -1235;
+    margin-bottom: 10px;
+  }
+
+  .nav-list{
+    vertical-align: middle;
+    display: table-cell;
+    width: 100%;
+  }

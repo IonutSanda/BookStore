@@ -10,6 +10,7 @@ import { AuthResponseModel } from '../models/auth-response-model';
 import { tap, map, switchMap } from 'rxjs/operators';
 import { roles } from 'src/app/constants/roles';
 import { RegisterDataModel } from '../models/register-model';
+import { notStrictEqual } from 'assert';
 
 @Injectable({
   providedIn: 'root'
@@ -139,7 +140,8 @@ export class AuthService {
     return this.users$.pipe(
       map((user) => {
         const isAuthenticated = !!Object.keys(user).length;
-        isAuthenticated ? true : false;
+        if(isAuthenticated) return true;
+        else return false;
       })
     );
   }
@@ -148,7 +150,8 @@ export class AuthService {
     return this.users$.pipe(
       map((user) => {
         const isAdmin = user.role == 'ADMIN' ? true : false;
-        isAdmin ? true : false;
+        if(isAdmin) return true;
+        else return false;
       })
     )
   }

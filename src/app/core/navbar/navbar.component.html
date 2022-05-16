@@ -24,21 +24,21 @@
 
   <div *ngIf="isActivatedAccountMenu" class="nav-account-menu">
     <div class="arrow"></div>
-    <ul class="nav-account-menu-list">
+    <ul class="nav-account-menu-link">
       <li class="nav-list">
-        <i class="fa-solid fa-user"></i>
+        <i class="fas fa fa-id-badge acount-menu-icon"></i>
       </li>
       <a class="link" routerLink="/auth/login" (click)="toggleAccountMenu()" *ngIf="!isAuthenticated">
-        <li class="nav-account-menu-list-login">Log in</li>
+        <li class="nav-account-menu-link-login">Log in</li>
       </a>
       <a class="link" routerLink="/auth/register" (click)="toggleAccountMenu()" *ngIf="!isAuthenticated">
-        <li class="nav-account-menu-list-register">Register</li>
+        <li class="nav-account-menu-link-register">Register</li>
       </a>
       <a class="link" (click)="toggleAccountMenu()" *ngIf="isAuthenticated">
-        <li class="nav-account-menu-login">Profile</li>
+        <li class="nav-account-menu-link-login">Profile</li>
       </a>
       <a class="link" (click)="toggleAccountMenu()" *ngIf="isAuthenticated">
-        <li class="nav-account-menu-login" (click)="onLogout()">Logout</li>
+        <li class="nav-account-menu-link-register" (click)="onLogout()">Logout</li>
       </a>
     </ul>
   </div>
