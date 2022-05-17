@@ -6,14 +6,12 @@ import { LoggedInGuard } from './services/guards/loggedIn.guard/logged-in.guard'
 
 const routes: Routes = [
   {
-    path: 'registration',
+    path: 'register',
     component: RegisterComponent,
-    canActivate: [LoggedInGuard]
   },
   {
     path: 'login',
     component: LoginComponent,
-    canActivate: [LoggedInGuard]
   }
 ];
 

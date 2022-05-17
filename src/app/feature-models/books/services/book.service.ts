@@ -10,7 +10,7 @@ import { BookModel } from '../models/book.model';
 })
 export class BookService {
 
-  private baseBookUrl = environment.onlineBookStoreServer.databaseURL + MAIN_ENDPOINTS.books;
+  private baseBookUrl = environment.firebase.databaseURL + MAIN_ENDPOINTS.books;
 
   private bookAuthors = new Set<String>();
 

@@ -10,7 +10,7 @@ import { map } from 'rxjs';
 })
 export class CategoryService {
 
-  private baseBookUrl = environment.onlineBookStoreServer.databaseURL + MAIN_ENDPOINTS.categories;
+  private baseBookUrl = environment.firebase.databaseURL + MAIN_ENDPOINTS.categories;
 
   constructor(private http: HttpClient) {}
 

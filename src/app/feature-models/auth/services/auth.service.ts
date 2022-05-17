@@ -16,7 +16,7 @@ import { RegisterDataModel } from '../models/register-model';
 })
 export class AuthService {
 
-  private baseBookUrl = environment.onlineBookStoreServer.databaseURL + MAIN_ENDPOINTS.users;
+  private baseBookUrl = environment.firebase.databaseURL + MAIN_ENDPOINTS.users;
   private users = new BehaviorSubject<UserModel>(<UserModel>{});
   public users$ = this.users.asObservable();
 
@@ -121,7 +121,10 @@ export class AuthService {
       }
 
       this.users.next(currentUser);
-    })
+    });
+
+    this.autoLogout(expiresIn * 1000);
+    document.cookie = 'token' + '=' + idToken + ';';
   }
 
   checkUserRole(user: UserModel){

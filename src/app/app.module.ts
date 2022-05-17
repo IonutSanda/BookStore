@@ -3,46 +3,36 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { NavbarComponent } from './core/navbar/navbar.component';
-import { FooterComponent } from './core/footer/footer.component';
-import { BooksListComponent } from './feature-models/books/components/books-list/books-list.component';
 import { HttpClientModule } from '@angular/common/http';
-import { BookComponent } from './feature-models/books/components/book/book.component';
-import { BookDetailsComponent } from './feature-models/books/components/book-details/book-details.component';
 import { BookModule } from './feature-models/books/book.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ReactiveFormsModule } from '@angular/forms';
-import { ModalModule } from 'ngx-bootstrap/modal';
-import { ShoppingCartModule } from './feature-models/books/services/popover-services/shopping-cart.module';
-import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
-import { environment } from '../environments/environment';
-import { provideAnalytics,getAnalytics,ScreenTrackingService,UserTrackingService } from '@angular/fire/analytics';
-import { provideAuth,getAuth, AuthModule } from '@angular/fire/auth';
-import { provideDatabase,getDatabase } from '@angular/fire/database';
-import { provideFirestore,getFirestore } from '@angular/fire/firestore';
-import { AngularFireAuth, AngularFireAuthModule } from '@angular/fire/compat/auth';
-import { AngularFireModule } from '@angular/fire/compat';
-import { ClickOutsideDirective } from './core/navbar/directives/click-outside.directive';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BsModalRef, ModalModule } from 'ngx-bootstrap/modal';
+// import { ShoppingCartModule } from './feature-models/books/services/popover-services/shopping-cart.module';
+import { ScreenTrackingService,UserTrackingService } from '@angular/fire/analytics';
+import { AuthModule } from '@angular/fire/auth';
+
+import { CoreModule } from './core/core.module';
+import { ShoppingCartModule } from './feature-models/shopping-cart/shopping-cart.module';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    NavbarComponent,
-    FooterComponent,
-    ClickOutsideDirective,
+    AppComponent
   ],
   imports: [
-    BookModule,
-    ShoppingCartModule,
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     HttpClientModule,
-    BrowserAnimationsModule,
+    CoreModule,
+    BookModule,
+    FormsModule,
     ReactiveFormsModule,
+    ShoppingCartModule,
     ModalModule.forRoot(),
     AuthModule,
-    AngularFireModule.initializeApp(environment.firebase),
-    AngularFireAuthModule
+    // AngularFireModule.initializeApp(environment.firebase),
+    // AngularFireAuthModule
     // provideFirebaseApp(() => initializeApp(environment.firebase)),
     // provideAnalytics(() => getAnalytics()),
     // provideAuth(() => getAuth()),
@@ -50,7 +40,7 @@ import { ClickOutsideDirective } from './core/navbar/directives/click-outside.di
     // provideFirestore(() => getFirestore())
   ],
   providers: [
-    ScreenTrackingService,UserTrackingService
+    ScreenTrackingService,UserTrackingService, BsModalRef
   ],
   bootstrap: [AppComponent]
 })

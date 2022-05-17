@@ -14,6 +14,12 @@ import { FilterPipe } from './services/pipes/filter.pipe';
 import { OrderByPipe } from './services/pipes/order-by.pipe'
 import { BookLoaderComponent } from 'src/app/shared/components/book-loader/book-loader.component';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { AngularFireStorageModule } from '@angular/fire/compat/storage';
+import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
+import { AngularFireModule } from '@angular/fire/compat';
+import { environment } from 'src/environments/environment';
+import { CoreModule } from 'src/app/core/core.module';
 
 @NgModule({
   declarations: [
@@ -24,13 +30,17 @@ import { SharedModule } from 'src/app/shared/shared.module';
     BookEditComponent,
     BookFormComponent,
     FilterPipe,
-    OrderByPipe
+    //OrderByPipe
   ],
   imports: [
-    SharedModule,
     CommonModule,
     BookRoutingModule,
     ReactiveFormsModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireStorageModule,
+    AngularFireDatabaseModule,
+    SharedModule,
+    CoreModule,
     TypeaheadModule.forRoot()
   ]
 })

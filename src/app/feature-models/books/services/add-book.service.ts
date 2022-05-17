@@ -11,7 +11,7 @@ import { BookService } from './book.service';
 })
 export class AddBookService {
 
-  private baseBookUrl = environment.onlineBookStoreServer.databaseURL + MAIN_ENDPOINTS.books;
+  private baseBookUrl = environment.firebase.databaseURL + MAIN_ENDPOINTS.books;
 
   private addedBookSubject = new Subject<BookModel>();
   

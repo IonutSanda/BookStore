@@ -1,14 +1,5 @@
-// {
-//   "targets": {
-//     "online-book-store-a405d": {
-//       "hosting": {
-//         "online_bookstore": [
-//           "online-book-store-a405d"
-//         ]
-//       }
-//     }
-//   },
-  "projects": {
+  {
+    "projects": {
     "default": "online-book-store-a405d"
   }
 }

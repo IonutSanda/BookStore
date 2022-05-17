@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AppComponent } from './app.component';
 
 const routes: Routes = [
 
@@ -16,7 +15,7 @@ const routes: Routes = [
   {
     path: 'shoppingcart',
     loadChildren: () =>
-      import('./feature-models/books/services/popover-services/shopping-cart.module').then((m) => m.ShoppingCartModule),
+      import('./feature-models/shopping-cart/shopping-cart.module').then((m) => m.ShoppingCartModule),
   },
 
 ];

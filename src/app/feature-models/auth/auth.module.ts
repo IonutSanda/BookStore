@@ -7,6 +7,9 @@ import { RegisterComponent } from './components/register/register.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { SvgTemplateComponent } from 'src/app/shared/components/templates/svg-template/svg-template.component';
+import { AngularFireModule } from '@angular/fire/compat';
+import { environment } from 'src/environments/environment';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 
 
 @NgModule({
@@ -20,6 +23,8 @@ import { SvgTemplateComponent } from 'src/app/shared/components/templates/svg-te
     AuthRoutingModule,
     FormsModule,
     ReactiveFormsModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireAuthModule,
     SharedModule
     // AngularFireModule.initializeApp(environment.firebase),
     // AngularFireAuthModule
