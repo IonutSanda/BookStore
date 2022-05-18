@@ -36,17 +36,17 @@
                     this.registerForm.controls.lastName.dirty &&
                     this.registerForm.controls.lastName.value
                 }" />
-      <div *ngIf="
+    </div>
+    <div *ngIf="
             !this.registerForm.controls.lastName.valid &&
             this.registerForm.controls.lastName.dirty &&
             this.registerForm.controls.lastName.value" class="input-invalid">
-        Last Name can only contain letters!
-      </div>
-      <div *ngIf="
+      Last Name can only contain letters!
+    </div>
+    <div *ngIf="
             registerForm.controls.lastName.touched && 
             registerForm.controls.lastName.value === '' " class="input-invalid">
-        Required!
-      </div>
+      Required!
     </div>
     <label for="email">Email:</label>
     <div class="form-group">
@@ -61,15 +61,17 @@
         <div class="spinner-border spinner-border-sm text-secondary"></div>
       </span>
 
-      <div *ngIf="
-            !this.registerForm.controls.email.errors?.pattern &&
+      <div class="input-invalid" 
+            *ngIf="
+            this.registerForm.controls.email.errors?.pattern &&
             this.registerForm.controls.email.dirty &&
-            this.registerForm.controls.email.value" class="input-invalid">
+              this.registerForm.controls.email.value === '' ">
         Please enter a valid E-mail Address!
       </div>
-      <div *ngIf="
-            registerForm.controls.email.touched && 
-            registerForm.controls.email.value === '' " class="input-invalid">
+      <div class="input-invalid"
+            *ngIf="
+              registerForm.controls.email.touched && 
+              registerForm.controls.email.value === '' " >
         Required!
       </div>
       <div *ngIf="this.registerForm.controls.email.errors?.emailExist" class="input-invalid">
@@ -126,38 +128,55 @@
       </div>
     </div>
 
-    <label for="confirmPassword">Confirm Password:</label>
+    <label for="confirmPassword">Confirm password: </label>
     <div class="form-group">
-      <input formControlName="confirmPassword" name="confirmPassword" id="confirmPassword" type="password"
-        class="form-control" placeholder="Confirm Password" [ngClass]="{
-                'input-error':
-                this.registerForm.controls.confirmPassword.dirty &&
-                this.registerForm.errors?.isNotMatching &&
-                this.registerForm.controls.confirmPassword.value !== ''
-            }" />
+      <input
+        formControlName="confirmPassword"
+        name="confirmPassword"
+        id="confirmPassword"
+        type="password"
+        class="form-control"
+        placeholder="Confirm password"
+        [ngClass]="{
+          'input-error':
+            this.registerForm.controls.confirmPassword.dirty &&
+            this.registerForm.errors?.isNotMatching &&
+            this.registerForm.controls.confirmPassword.value !== ''
+        }"
+      />
     </div>
-    <div *ngIf="
+
+    <div
+      class="input-invalid"
+      *ngIf="
+        this.registerForm.controls.confirmPassword.touched &&
+        this.registerForm.controls.confirmPassword.value === ''
+      "
+    >
+      Required.
+    </div>
+    <div
+      class="input-invalid"
+      *ngIf="
         this.registerForm.controls.confirmPassword.dirty &&
         this.registerForm.errors?.isNotMatching &&
-        this.registerForm.controls.confirmPassword.value !== ''" class="input-invalid">
-        Passwords do not match!
+        this.registerForm.controls.confirmPassword.value !== ''
+      "
+    >
+      Passwords are not matching.
     </div>
-    <div *ngIf="
-        registerForm.controls.confirmPassword.touched && 
-        registerForm.controls.confirmPassword.value === '' " class="input-invalid">
-      Required!
-    </div>
-    <input 
-        name="confirmTerms"
-        id="confirmTerms"
-        type="checkbox"
-        class="form-control"
-        (change)="isAccepted = !isAccepted"
-        [disabled]="isDisabled"
+
+    <input
+      name="confirmTerms"
+      id="confirmTerms"
+      type="checkbox"
+      class="form-control"
+      (change)="isAccepted = !isAccepted"
+      [disabled]="isDisabled"
     />
     <span>
-        <label for="confirmTerms">I agree all statements mentioned</label>
-        <a (click)="openModal(template)" class="span-terms-service-link">Terms of Service</a>
+        <label for="confirmTerms">I agree all statements mentioned in </label>
+        <a (click)="openModal(template)" class="span-terms-service-link"> Terms of Service</a>
     </span>
     <br /><br />
     <button class="btn btn-success btn-create-account" type="submit" [disabled]="!isValid() || this.registerForm.status === 'PENDING'">Create Account</button>
