@@ -56,7 +56,7 @@ export class RegisterComponent implements OnInit {
   items: string[];
   userData: RegisterDataModel;
   isAccepted = false;
-  isDisabled = false;
+  isDisabled = true;
   isLoadingEmail$: Observable<boolean>;
   isLoadingData$: Observable<boolean>;
 

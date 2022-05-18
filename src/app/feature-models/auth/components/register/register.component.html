@@ -65,7 +65,7 @@
             *ngIf="
             this.registerForm.controls.email.errors?.pattern &&
             this.registerForm.controls.email.dirty &&
-              this.registerForm.controls.email.value === '' ">
+              this.registerForm.controls.email.value">
         Please enter a valid E-mail Address!
       </div>
       <div class="input-invalid"
@@ -74,7 +74,7 @@
               registerForm.controls.email.value === '' " >
         Required!
       </div>
-      <div *ngIf="this.registerForm.controls.email.errors?.emailExist" class="input-invalid">
+      <div class="input-invalid" *ngIf="this.registerForm.controls.email.errors?.emailExist">
         Email is already in use by another account!
       </div>
     </div>
@@ -167,10 +167,10 @@
     </div>
 
     <input
+      type="checkbox"
       name="confirmTerms"
       id="confirmTerms"
-      type="checkbox"
-      class="form-control"
+      class="checkbox"
       (change)="isAccepted = !isAccepted"
       [disabled]="isDisabled"
     />
@@ -193,10 +193,10 @@
         <h4 class="modal-title pull-left">Terms of service</h4>
         <button
             type="button"
-            class="close pull-right"
+            class="btn btn-light"
             aria-label="Close"
             (click)="modalRef.hide()"
-        ></button>
+        >X</button>
     </div>
     <div class="modal-body">
         <p *ngFor="let item of items">

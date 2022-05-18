@@ -65,8 +65,8 @@ export class ValidatorsService {
       this.loadingService.show();
       return this.searchEmail(control.value).then((res) => {
         this.loadingService.hide();
-        return res.length > 0 ? {emailExists: true} : null;
-      })
-    }
+        return res.length > 0 ? {emailExist: true} : null;
+      });
+    };
   }
 }
