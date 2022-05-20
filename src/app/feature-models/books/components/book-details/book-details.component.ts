@@ -3,6 +3,7 @@ import { Component, ElementRef, OnInit, TemplateRef, ViewChild } from '@angular/
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, switchMap, map } from 'rxjs';
 import { BookLoadingService } from 'src/app/core/services/utility/book-loading.service';
+import { AuthService } from 'src/app/feature-models/auth/services/auth.service';
 import { BookModule } from '../../book.module';
 import { BookModel } from '../../models/book.model';
 import { BookService } from '../../services/book.service';
@@ -27,7 +28,7 @@ export class BookDetailsComponent implements OnInit {
   isEditMobile: boolean = false;  
   //Change to observables and create them as async in html
   isMobile$: boolean = true;
-  authSource$: boolean = false;
+  authSource: Observable<boolean>;
   isLoadingData$: Observable<boolean>;
 
   constructor(
@@ -36,7 +37,8 @@ export class BookDetailsComponent implements OnInit {
     private bookService: BookService,
     private editBookService: EditBookService,
     private modalService: ModalService,
-    private bookLoadingService: BookLoadingService
+    private bookLoadingService: BookLoadingService,
+    private authService: AuthService
   ) { }
 
   ngOnInit(): void {
@@ -45,6 +47,8 @@ export class BookDetailsComponent implements OnInit {
 
     this.bookLoadingService.show();
     this.isLoadingData$ = this.bookLoadingService.loading$;
+
+    this.authSource = this.authService.isCurrentUserAdmin();
 
     this.route.params
       .pipe(

@@ -6,7 +6,7 @@
 <div class="books_list_body">
   <div class="books_list_filters">
     <!-- <ng-template> -->
-    <button class="btn-dark" (click)="openForm(template)">Add Book</button>
+    <button class="btn-dark" (click)="openForm(template)" *ngIf="authSource | async">Add Book</button>
     <div class="filter_categories">
       <div class="filter_categories_title" (click)="onToggleCategories()">
         Category

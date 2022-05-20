@@ -25,16 +25,18 @@
           <i>Category: <strong>{{bookAsync.category}}</strong></i>
         </div>
         <div class="book_action_buttons">
+          <div class="isadmin" *ngIf="authSource | async">
           <button class="btn btn-warning" type="button" *ngIf="!isMobile$; else desktopView"
             (click)="setCurrentBook(bookAsync)">Edit</button>
+          </div>
           <button class="btn btn-secondary">Add To Cart</button>
           <button class="btn btn-primary">Add to Wishlist</button>
-          <button class="btn btn-danger" (click)="onDeleteBook()">Delete</button>
+          <button class="btn btn-danger" (click)="onDeleteBook()" *ngIf="authSource | async">Delete</button>
         </div>
       </div>
     </div>
 
-    <ng-template #desktopView [ngIf]="authSource$">
+    <ng-template #desktopView>
       <button class="btn btn-warning" (click)="openForm(editBookModal); setEditFormValues(bookAsync)"
         #openModal>Edit</button>
 

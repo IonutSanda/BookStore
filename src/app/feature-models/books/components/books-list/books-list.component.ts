@@ -9,6 +9,7 @@ import { animate, AUTO_STYLE, state, style, transition, trigger } from '@angular
 import { Router } from '@angular/router';
 import { AddBookService } from '../../services/add-book.service';
 import { BookLoadingService } from 'src/app/core/services/utility/book-loading.service';
+import { AuthService } from 'src/app/feature-models/auth/services/auth.service';
 
 @Component({
   selector: 'app-books-list',
@@ -38,8 +39,9 @@ export class BooksListComponent implements OnInit {
   priceRangeMin: number = 1;
   priceRangeMax: number = 999;
   isLoadingData$: Observable<boolean>;
+  authSource: Observable<boolean>;
 
-  constructor(private bookService: BookService, private categoryService: CategoryService, private modalService: ModalService, private router: Router, private addedBookService: AddBookService, private bookLoadingService: BookLoadingService) { 
+  constructor(private bookService: BookService, private categoryService: CategoryService, private modalService: ModalService, private router: Router, private addedBookService: AddBookService, private bookLoadingService: BookLoadingService, private authService: AuthService) { 
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;    
   }
 
@@ -50,6 +52,8 @@ export class BooksListComponent implements OnInit {
     this.addedBookService.addedBookAction$.subscribe((data) => {
       this.booksArray.push(data);
     })
+
+    this.authSource = this.authService.isCurrentUserAdmin();
 
     this.bookService.getBooks().subscribe((books) => {
       this.booksArray = books;
