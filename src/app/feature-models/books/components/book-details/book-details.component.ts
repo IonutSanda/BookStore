@@ -1,9 +1,12 @@
 import { ThisReceiver } from '@angular/compiler';
 import { Component, ElementRef, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { user } from '@angular/fire/auth';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, switchMap, map } from 'rxjs';
 import { BookLoadingService } from 'src/app/core/services/utility/book-loading.service';
+import { UserModel } from 'src/app/feature-models/auth/models/user-model';
 import { AuthService } from 'src/app/feature-models/auth/services/auth.service';
+import { ShoppingCartService } from 'src/app/feature-models/shopping-cart/services/shopping-cart.service';
 import { BookModule } from '../../book.module';
 import { BookModel } from '../../models/book.model';
 import { BookService } from '../../services/book.service';
@@ -30,6 +33,9 @@ export class BookDetailsComponent implements OnInit {
   isMobile$: boolean = true;
   authSource: Observable<boolean>;
   isLoadingData$: Observable<boolean>;
+  isUserAuth: boolean = false;
+  currentUser$: Observable<UserModel> = this.authService.users$;
+  user: UserModel
 
   constructor(
     private router: Router,
@@ -38,7 +44,8 @@ export class BookDetailsComponent implements OnInit {
     private editBookService: EditBookService,
     private modalService: ModalService,
     private bookLoadingService: BookLoadingService,
-    private authService: AuthService
+    private authService: AuthService,
+    private cartService: ShoppingCartService
   ) { }
 
   ngOnInit(): void {
@@ -65,6 +72,18 @@ export class BookDetailsComponent implements OnInit {
       
       this.editBook$ = this.editBookService.getEditBook();
       this.editedBookFromForm$ = this.modalService.bookBehaviorSubject$;
+
+      this.currentUser$
+        .pipe(
+          switchMap((data)=>{
+            this.user = data;
+            return this.authService.getUserById(data.id);
+          })
+        ).subscribe();
+
+        this.authService.isUserAuthenticated().subscribe((data) => {
+          this.isUserAuth = data;
+        })
 
   }
 
@@ -107,6 +126,15 @@ export class BookDetailsComponent implements OnInit {
 
   closeConfirmModal(){
     this.modalService.closeConfirmModal();
+  }
+
+  addToCart(book: BookModel){
+    if(this.isUserAuth){
+      this.cartService.addProduct(book, this.productId);
+      console.log(book);
+    } else{
+      this.router.navigate(['/auth/login']);
+    }
   }
 
 }

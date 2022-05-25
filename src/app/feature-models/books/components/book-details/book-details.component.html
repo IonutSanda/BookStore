@@ -29,7 +29,7 @@
           <button class="btn btn-warning" type="button" *ngIf="!isMobile$; else desktopView"
             (click)="setCurrentBook(bookAsync)">Edit</button>
           </div>
-          <button class="btn btn-secondary">Add To Cart</button>
+          <button class="btn btn-secondary" (click)="addToCart(bookAsync)">Add To Cart</button>
           <button class="btn btn-primary">Add to Wishlist</button>
           <button class="btn btn-danger" (click)="onDeleteBook()" *ngIf="authSource | async">Delete</button>
         </div>
