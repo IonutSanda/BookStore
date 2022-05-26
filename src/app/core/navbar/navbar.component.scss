@@ -14,13 +14,22 @@
     margin: 15px;
 }
 
-.nav-account-icon > .active{
+.nav-account-icon > .active,
+.nav-wishlist-icon > .active{
     color: lightblue;
 }
 
-.nav-account-icon{
+.nav-wishlist-icon{
+    margin: auto;
+}
+.nav-account-icon
+{
     margin: auto;
     margin-right: 23px;
+}
+.nav-shopping-icon{
+    margin: auto;
+    margin-left: 23px;
 }
 
 .book_icon{
@@ -83,11 +92,15 @@
      margin: 15px;
  }
 
- .user-account{
+ .user-account,
+ .wishlist-account,
+ .shopping-account{
      font-size: 25px;
  }
 
- .user-account:hover{
+ .user-account:hover,
+ .wishlist-account:hover,
+.shopping-account:hover{
      color: lightblue;
  }
 
@@ -107,6 +120,7 @@
     border-collapse: separate;
     border-spacing: 0 5px;
     margin-top: -45px;
+    margin-right: 5px;
  }
 
  .nav-account-menu-link {
@@ -167,15 +181,67 @@
     background-color: white;
     transform: rotate(45deg);
     margin-top: -23px;
-    margin-left: 130px;
+    margin-left: 171px;
     border-top: 1px solid gray;
     border-left: 1px solid gray;
     z-index: -1235;
     margin-bottom: 10px;
   }
 
+  .arrow-wishlist {
+    height: 15px;
+    width: 15px;
+    background-color: white;
+    transform: rotate(45deg);
+    margin-top: -23px;
+    margin-left: 219px;
+    border-top: 1px solid gray;
+    border-left: 1px solid gray;
+    z-index: -1235;
+    margin-bottom: 10px;
+  }
+
+  .arrow-cart {
+    height: 15px;
+    width: 15px;
+    background-color: white;
+    transform: rotate(45deg);
+    margin-top: -23px;
+    margin-left: 265px;
+    border-top: 1px solid gray;
+    border-left: 1px solid gray;
+    z-index: -1235;
+    margin-bottom: 10px;
+  }
+
+  .wishlist-login{
+      text-decoration: none;
+      font-weight: bold;
+      color: darkblue;
+  }
+
   .nav-list{
     vertical-align: middle;
     display: table-cell;
     width: 100%;
+  }
+
+  .nav-cart{
+      display: table;
+      position: absolute;
+      list-style-type: none;
+      background-color: white;
+      right: 0px;
+      width: 322px;
+      padding: 5px 0 50px 0;
+      border: 1px solid gray;
+      z-index: 5555;
+      padding: 10px 20px;
+      border-radius: 10px;
+      text-align: center;
+      margin-top: -45px;
+      box-shadow: rgba(0, 0, 0, 0.5) 0px 22px 70px 4px;
+      border-collapse: separate;
+      border-spacing: 0 5px;
+      margin-right: 5px;
   }

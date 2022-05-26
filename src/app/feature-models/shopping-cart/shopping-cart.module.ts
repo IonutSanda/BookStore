@@ -5,6 +5,8 @@ import { BookDetailCartPopoverComponent } from './components/book-detail-cart-po
 import { WishlistPopoverComponent } from './components/wishlist-popover/wishlist-popover.component';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { ShoppingCartRoutingModule } from './shopping-cart-routing.module';
+import { SharedModule } from 'src/app/shared/shared.module';
+import { RouterModule } from '@angular/router';
 
 
 
@@ -17,7 +19,10 @@ import { ShoppingCartRoutingModule } from './shopping-cart-routing.module';
   ],
   imports: [
     CommonModule,
-    ShoppingCartRoutingModule
-  ]
+    ShoppingCartRoutingModule,
+    SharedModule,
+    RouterModule
+  ],
+  exports:[BookDetailCartPopoverComponent, WishlistPopoverComponent]
 })
 export class ShoppingCartModule { }

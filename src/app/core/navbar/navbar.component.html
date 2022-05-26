@@ -13,15 +13,23 @@
     </div>
     <div class="nav nav_right">
       <div (appClickOutside)="isActivatedAccountMenu = false" (click)="toggleAccountMenu()" class="nav-account-icon">
-        <span class="user-account" [ngClass]="{active: isActivatedAccountMenu}"><i class="fas fa fa-user user_icon"></i></span>
+        <span class="user-account" [ngClass]="{active: isActivatedAccountMenu}"><i
+            class="fas fa fa-user user_icon"></i></span>
       </div>
-      <i class="fas fa fa-star star_icon"></i>
-      <a routerLink="/shoppingcart">
-        <i class="fas fa fa-shopping-cart cart_icon"></i>
-      </a>
+      <div (appClickOutside)="isActivatedWishlist = false" (click)="toggleWishlistMenu()" class="nav-wishlist-icon">
+        <span class="wishlist-account" [ngClass]="{active: isActivatedWishlist}">
+          <i class="fas fa fa-star star_icon"></i></span>
+      </div>
+      <div (appClickOutside)="isActivatedCartMenu = false" (click)="toggleCartMenu()" class="nav-shopping-icon">
+        <span class="shopping-account" [ngClass]="{active: isActivatedCartMenu}">
+          <i class="fas fa fa-shopping-cart cart_icon"></i>
+        </span>
+      </div>
     </div>
   </div>
 
+
+  <!-- AccountMenu Popover -->
   <div *ngIf="isActivatedAccountMenu" class="nav-account-menu">
     <div class="arrow"></div>
     <ul class="nav-account-menu-link">
@@ -41,5 +49,56 @@
         <li class="nav-account-menu-link-register" (click)="onLogout()">Logout</li>
       </a>
     </ul>
+  </div>
+
+  <!-- Wishlist Popover -->
+  <div *ngIf="isActivatedWishlist" class="nav-cart">
+    <div class="arrow-wishlist"></div>
+    <ng-container *ngIf="!isAuthenticated; else isAuth">
+      <a class="wishlist-login" [routerLink]="['/auth/login']">Log in</a>to add to your Wishlist
+    </ng-container>
+    <ng-template #isAuth>
+      <ng-container *ngIf="wishlistBooks | async as books">
+        Your Wishlist
+        <div *ngIf="books.length === 0">No Books</div>
+        <div class="products-container">
+          <app-wishlist-popover *ngFor="let book of books" class="products-book" [book]="book"
+            (emitBook)="deleteFromWishlist($event)"></app-wishlist-popover>
+        </div>
+      </ng-container>
+    </ng-template>
+  </div>
+  <!-- Cart -->
+  <div *ngIf="isActivatedCartMenu" class="nav-cart">
+    <ng-container *ngIf="cartBooks$ | async as cartBooks">
+      <div class="arrow-cart"></div>
+      <ul class="nav-cart-menu-link">
+        <li *ngIf="cartBooks.numberOfProducts != 0" class="nav-list">
+          {{
+            cartBooks.numberOfProducts === 1 ? "Cart(" + cartBooks.numberOfProducts + " product)" : "Cart(" + cartBooks.numberOfProducts + " products)"
+          }}
+          <hr/>
+        </li>
+        <ng-container *ngIf="cartBooks.numberOfProducts === 0">
+          <li class="nav-list">Shoppingcart is empty</li>
+        </ng-container>
+        <ng-container *ngIf="cartBooks.numberOfProducts != 0 && cartBooks.books">
+          <div class="products-container">
+            <app-book-detail-cart-popover *ngFor="let book of transformFromObjectToArray(cartBooks.books)" class="products-book" [book]="book" (deleteBook)="deleteProduct($event)"></app-book-detail-cart-popover>
+          </div>
+          <div class="div">
+            <hr/>
+          </div>
+          <div class="total">
+            <div class="total-title">Subtotal:</div>
+            <div class="total-price">{{cartBooks.subtotalPrice | currency: 'RON'}}</div>
+          </div>
+          <br/>
+          <button class="btn btn-primary btn-view-cart">
+            <span class="view-cart-text" routerLink="/shoppingcart">View Cart</span>
+          </button>
+        </ng-container>
+      </ul>
+    </ng-container>
   </div>
 </nav>

@@ -4,9 +4,9 @@ import { switchMap } from 'rxjs/operators';
 import { UserModel } from 'src/app/feature-models/auth/models/user-model';
 import { AuthService } from 'src/app/feature-models/auth/services/auth.service';
 import { BookModel } from 'src/app/feature-models/books/models/book.model';
-import { WishlistService } from 'src/app/feature-models/books/services/popover-services/services/wishlist.service';
 import { CartModel } from 'src/app/feature-models/shopping-cart/model/cart-model';
 import { ShoppingCartService } from 'src/app/feature-models/shopping-cart/services/shopping-cart.service';
+import { WishListService } from 'src/app/feature-models/shopping-cart/services/wish-list.service';
 
 @Component({
   selector: 'app-navbar',
@@ -37,7 +37,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
     subtotalPrice: 0
   };
 
-  constructor(private wishlistSerivce: WishlistService, private authService: AuthService, private addToCartService: ShoppingCartService) { }
+  constructor(private wishlistSerivce: WishListService, private authService: AuthService, private addToCartService: ShoppingCartService) { }
 
   ngOnInit(): void {
     this.isAuthenticatedSubscription = this.authService.isUserAuthenticated().subscribe(authStatus => {
@@ -103,7 +103,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
     this.addToCartService.deleteProduct(product);
   }
 
-  deleteProductFromWishlist(bookToDelete: BookModel): void{
+  deleteFromWishlist(bookToDelete: BookModel): void{
     this.wishlistSerivce.deleteBookFromWishlist(bookToDelete.productId).subscribe();
   }
 

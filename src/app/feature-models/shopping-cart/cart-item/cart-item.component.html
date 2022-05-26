@@ -1,1 +1,35 @@
-<p>cart-item works!</p>
+<div class="card">
+    <div class="card-image">
+        <img [src]="book.imageUrl">
+    </div>
+    <div class="card-details">
+        <div class="card-details-delete">
+            <p class="card-details-delete-ptag">
+                <strong>Book Author:</strong>
+                {{book.author}}
+            </p>
+            <span (click)="emitBook()">
+                <i class="fa-solid fa-xmark"></i>
+            </span>
+        </div>
+        <div *ngIf="!showMore" class="card-details-fade"></div>
+        <div class="showmore">
+            <p class="{{!showMore ? 'card-details-content-show' : 'card-details-content-hide'}}">
+                <strong>Book Description:</strong>
+                {{book.description}}
+            </p>
+        <button class="btn btn-primary" (click)="toggleShowMore()">{{showMore! ? "Hide" : "Read more"}}</button>
+        </div>
+        <p>
+            <strong>Book Publishing House</strong>
+            {{book.publishingHouse}}
+        </p>
+        <p>
+            <strong>Book Category</strong>
+            {{book.category}}
+        </p>
+        <p>
+            <strong>{{book.price | currency: 'RON'}} x {{book.quantity}} pcs.</strong>
+        </p>
+    </div>
+</div>
