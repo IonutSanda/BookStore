@@ -21,6 +21,7 @@
 .forgot-password-text{
     padding: 0;
     margin: 0;
+    margin-top: 10px;
 }
 
 .form-title{
@@ -42,7 +43,7 @@
 
 .buttons-container{
     display: grid;
-    width: 60%;
+    width: 50%;
     grid-template-columns: repeat(2, 1fr);
     align-items: start;
     grid-row: 4/5;
@@ -53,6 +54,15 @@
 .button-login{
     grid-column: 1/2;
 }
+
+.button-login:hover,
+.button-registration:hover{
+    transform: scale(1.03);
+    border: 1px solid lightgray;
+    background-color: rgb(44, 44, 212);
+
+}
+
 .button-register{
     grid-column: 3/4;
 }
@@ -61,6 +71,7 @@
     width: 100%;
     height: 100%;
     display: grid;
+    margin-left: 85px;
 }
 
 .invalid{

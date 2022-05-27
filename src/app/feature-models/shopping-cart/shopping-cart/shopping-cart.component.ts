@@ -15,8 +15,8 @@ export class ShoppingCartComponent implements OnInit {
 
   cartBook: CartModel = {
     books: [],
-    subtotalPrice: 0,
-    numberOfProducts: 0
+    numberOfProducts: 0,
+    subtotalPriceProducts: 0
   };
 
   books: BookModel[] = [];
@@ -53,7 +53,7 @@ export class ShoppingCartComponent implements OnInit {
     this.shoppingCartService.deleteProduct(book);
     this.books = this.books.filter((book) => book.title !== book.title);
     this.cartBook.books = this.books;
-    this.cartBook.subtotalPrice = this.cartBook.subtotalPrice - book.price * +book.quantity;
+    this.cartBook.subtotalPriceProducts = this.cartBook.subtotalPriceProducts - book.price * +book.quantity;
     this.cartBook.numberOfProducts = this.cartBook.numberOfProducts - +book.quantity;
     this.products.next(this.cartBook);
   }

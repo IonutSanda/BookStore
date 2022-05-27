@@ -233,7 +233,7 @@
       background-color: white;
       right: 0px;
       width: 322px;
-      padding: 5px 0 50px 0;
+      padding: 5px 0 5px 0;
       border: 1px solid gray;
       z-index: 5555;
       padding: 10px 20px;
@@ -244,4 +244,21 @@
       border-collapse: separate;
       border-spacing: 0 5px;
       margin-right: 5px;
+  }
+
+  .nav-cart-menu-link{
+      padding: 0px;
+  }
+
+  .btn-view-cart{
+      transition: all 0.3s;
+      background-color: lightblue;
+      color: black;
+      border: none;
+  }
+
+  .btn-view-cart:hover{
+      transform: scale(1.03);
+      border: 1px solid lightgray;
+      background-color: rgba(111, 201, 111, 0.836);
   }

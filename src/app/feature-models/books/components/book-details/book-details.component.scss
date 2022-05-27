@@ -64,6 +64,12 @@ button{
     font-size: 20px;
 }
 
+.btn-show-more:hover{
+    transform: scale(1.03);
+    border: 1px solid lightgray;
+    background-color: #30343a;
+}
+
 .limitTextHeight {
     height: 100px;
     overflow: hidden;

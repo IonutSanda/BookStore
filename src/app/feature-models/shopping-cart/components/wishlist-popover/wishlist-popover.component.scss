@@ -1,0 +1,104 @@
+// @import "/src/mixins.scss";
+
+*,
+*:after,
+*:before {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.products-container {
+  display: flex;
+//   grid-auto-columns: 75px auto 40px;
+  grid-gap: 10px;
+  max-height: 240px;
+  overflow-y: auto;
+  margin-bottom: 10px;
+  padding: 2px;
+  border: 1px solid gray;
+}
+
+.products-url {
+  text-decoration: none;
+  color: black;
+}
+
+.products-url:hover {
+  text-decoration: underline;
+}
+
+.products-container::-webkit-scrollbar {
+  width: 6px;
+}
+
+.products-container::-webkit-scrollbar-track {
+  background: lightblue;
+}
+
+.products-container::-webkit-scrollbar-thumb {
+  background: lightblue;
+}
+
+.products-container::-webkit-scrollbar-thumb:hover {
+  background: lightblue;
+}
+
+.products-img {
+  height: 112px;
+  width: 75px;
+//   grid-column: 1/2;
+}
+
+// .products-detail {
+//   grid-column: 2/3;
+//   grid-template-rows: repeat(3, 1fr);
+// }
+
+.products-detail-author {
+//   grid-row: 1/2;
+  font-weight: 600;
+  text-align: left;
+  font-size: 12px;
+}
+
+.products-detail-title {
+//   grid-row: 2/3;
+  text-align: left;
+  height: 20px;
+  overflow: hidden;
+  font-size: 12px;
+  text-overflow: ellipsis;
+  font-style: italic;
+}
+
+.addToCart-button{
+    height: 25px;
+    width: 80%;
+    border: none;
+    font-size: small;
+    padding: 0;
+    background-color: lightblue;
+    color: black;
+    transition: all 0.3s;
+}
+
+.addToCart-button:hover{
+    transform: scale(1.03);
+    border: 1px solid lightgray;
+    background-color: rgba(111, 201, 111, 0.836);
+}
+
+.product-delete {
+//   grid-column: 3/4;
+  cursor: pointer;
+  align-content: center;
+  display: flex;
+  margin: auto;
+  text-align: center;
+  justify-content: center;
+
+  // &:hover {
+  //   transform: scale(1.1);
+  // }
+}

@@ -34,7 +34,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
   cartBooks: CartModel = {
     books: [],
     numberOfProducts: 0,
-    subtotalPrice: 0
+    subtotalPriceProducts: 0
   };
 
   constructor(private wishlistSerivce: WishListService, private authService: AuthService, private addToCartService: ShoppingCartService) { }

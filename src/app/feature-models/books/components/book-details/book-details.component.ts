@@ -1,13 +1,11 @@
-import { ThisReceiver } from '@angular/compiler';
 import { Component, ElementRef, OnInit, TemplateRef, ViewChild } from '@angular/core';
-import { user } from '@angular/fire/auth';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, switchMap, map } from 'rxjs';
 import { BookLoadingService } from 'src/app/core/services/utility/book-loading.service';
 import { UserModel } from 'src/app/feature-models/auth/models/user-model';
 import { AuthService } from 'src/app/feature-models/auth/services/auth.service';
 import { ShoppingCartService } from 'src/app/feature-models/shopping-cart/services/shopping-cart.service';
-import { BookModule } from '../../book.module';
+import { WishListService } from 'src/app/feature-models/shopping-cart/services/wish-list.service';
 import { BookModel } from '../../models/book.model';
 import { BookService } from '../../services/book.service';
 import { EditBookService } from '../../services/edit-book.service';
@@ -45,7 +43,8 @@ export class BookDetailsComponent implements OnInit {
     private modalService: ModalService,
     private bookLoadingService: BookLoadingService,
     private authService: AuthService,
-    private cartService: ShoppingCartService
+    private cartService: ShoppingCartService,
+    private wishlistService: WishListService
   ) { }
 
   ngOnInit(): void {
@@ -131,8 +130,19 @@ export class BookDetailsComponent implements OnInit {
   addToCart(book: BookModel){
     if(this.isUserAuth){
       this.cartService.addProduct(book, this.productId);
-      console.log(book);
     } else{
+      this.router.navigate(['/auth/login']);
+    }
+  }
+  
+  addToWishlist(book: BookModel): void{
+    if(this.isUserAuth){
+      if(!this.wishlistService.isBookInWishlist(this.productId)){
+        this.wishlistService.addBookToWishlist(book, this.productId).subscribe(() => console.log('Book added to wishlist'));
+      } else {
+        console.log('Book already in wishlist');
+      }
+    } else {
       this.router.navigate(['/auth/login']);
     }
   }

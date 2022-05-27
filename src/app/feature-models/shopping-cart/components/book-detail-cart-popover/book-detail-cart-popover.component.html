@@ -1,16 +1,18 @@
+<div class="products-url" (click)="changeRoute(book.productId)">
 <div class="products-container">
     <div class="products-img">
-        <img [src]="book.imageUrl" alt="">
+        <img height="120px" width="75px" [src]="book.imageUrl" alt="">
     </div>
-    <a class="products-url" routerLink="{{ book.productId }}">
+    <!-- <a class="products-url" routerLink="{{ book.productId }}"> -->
         <div class="products-detail">
             <div class="product-detail-author">{{book.author}}</div>
             <div class="product-detail-title">{{book.title}}</div>
             <div class="product-detail-quantity"><strong>Quanity:</strong> {{book.quantity}} </div>
-            <div class="product-detail-price">{{book.price}}</div>
+            <div class="product-detail-price"><strong>Price: </strong>{{book.price}}</div>
         </div>
-    </a>
+    <!-- </a> -->
     <div class="delete" (click)="emitBook()">
         <b>X</b>
     </div>
+</div>
 </div>

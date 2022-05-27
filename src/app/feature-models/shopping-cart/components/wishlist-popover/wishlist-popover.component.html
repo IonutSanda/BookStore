@@ -1,14 +1,14 @@
-<div class="products-link" (click)="changeRoute(book.productId)">
+<div class="products-url" (click)="changeRoute(book.productId)">
     <div class="products-container">
         <div class="products-img">
             <img height="100px" width="75px" [src]="book.imageUrl" alt="">
         </div>
-        <div class="product-details">
-            <div class="product-author"></div>
-            <div class="product-title"></div>
-            <div class="product-price"></div>
-            <div class="product-addToCart">
-                <button class="btn btn-primary" (click)="addToCart($event)">Add to Cart</button>
+        <div class="product-detail">
+            <div class="product-detail-author">{{book.author}}</div>
+            <div class="product-detail-title">{{book.title}}</div>
+            <div class="product-detail-price"><strong>Price: </strong>{{book.price}}</div>
+            <div class="product-detail-addToCart">
+                <button class="btn btn-primary addToCart-button" (click)="addToCart($event)">Add to Cart</button>
             </div>
         </div>
 

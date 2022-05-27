@@ -75,6 +75,24 @@
     cursor: pointer;
   }
   
+  .read_more{
+      width: 20%;
+      transition: all 0.3s;
+      cursor: pointer;
+      background-color: rgb(173, 216, 230);
+      color: black;
+      font-weight: 300;
+      border: none;
+      padding: 4px;
+      justify-self: center;
+      border-radius: 20px;
+  }
+.read_more:hover{
+    transform: scale(1.03);
+    background-color: rgba(214, 241, 250, 0.836);
+    border: 1px solid rgb(75, 75, 75);
+}
+
   @media screen and (max-width: 1000px) {
   
     .card {

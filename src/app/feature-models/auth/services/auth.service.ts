@@ -92,7 +92,7 @@ export class AuthService {
           userId: user?.uid,
           cart: {
             numberOfProducts: 0,
-            subTotalPrice: 0
+            subtotalPriceProducts: 0
           },
         },
         user?.uid);

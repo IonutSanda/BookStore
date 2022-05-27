@@ -1,5 +1,4 @@
 import { HttpClient } from '@angular/common/http';
-import { REFERENCE_PREFIX } from '@angular/compiler/src/render3/view/util';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { MAIN_ENDPOINTS } from 'src/app/constants/endpoints';
@@ -17,7 +16,7 @@ export class ShoppingCartService {
   cartBooks: CartModel = {
     books: [],
     numberOfProducts: 0,
-    subtotalPrice: 0
+    subtotalPriceProducts: 0
   };
 
   books: BookModel[] = [];
@@ -34,6 +33,7 @@ export class ShoppingCartService {
   }
 
   getDataFromDatabase(data: CartModel){
+    console.log(`getfromfirebase: ${data}`)
     if(data.numberOfProducts === 0){
       this.products.next(data);
     } else {
@@ -47,15 +47,21 @@ export class ShoppingCartService {
     this.products.next(cartBook);
   }
 
-  addProduct(book: BookModel, id: string){
+  public addProduct(book: BookModel, id: string){
     book = { ...book, quantity: 1, productId: id};
-
-    if(this.objectExists(book)){
+    console.log('objectexists result');
+    console.log(this.objectExist(book));
+    if(this.objectExist(book)){
       const key = this.getKeyByValue(this.books, book);
       this.books[key].quantity = this.books[key].quantity + 1;
       this.addBookToCart(book.price, 1).subscribe((res) => {
         console.log('Book has been added');
       });
+    } else {
+      this.books.push(book);
+      this.addBookToCart(book.price, 1).subscribe((res) => {
+        console.log('Book has been added');
+      })
     }
 
     this.products.next(this.cartBooks);
@@ -67,18 +73,16 @@ export class ShoppingCartService {
     this.cartBooks = {
       books: {...this.books},
       numberOfProducts: this.cartBooks.numberOfProducts + +product,
-      subtotalPrice: this.cartBooks.subtotalPrice + +price
+      subtotalPriceProducts: this.cartBooks.subtotalPriceProducts + +price
     };
     return this.http.put(addBookUrl, this.cartBooks);
   }
 
   deleteProduct(product: BookModel){
-    this.books = this.books.filter((book) => {
-      book.title != product.title;
-    });
+    this.books = this.books.filter((book) => book.title != product.title);
     this.cartBooks.books = {...this.books};
     this.cartBooks.numberOfProducts = this.cartBooks.numberOfProducts - +product.quantity;
-    this.cartBooks.subtotalPrice = this.cartBooks.subtotalPrice - product.price * +product.quantity;
+    this.cartBooks.subtotalPriceProducts = this.cartBooks.subtotalPriceProducts - product.price * +product.quantity;
   
     this.updateCart(this.cartBooks).subscribe((res)=> {
       console.log('Book has been deleted');
@@ -94,13 +98,13 @@ export class ShoppingCartService {
     this.cartBooks = {
       books: [],
       numberOfProducts: 0,
-      subtotalPrice: 0
+      subtotalPriceProducts: 0
     }
 
     return this.http.put(deleteCartUrl, {
       cart: [],
       numberOfProducts: 0,
-      subtotalPrice: 0
+      subtotalPriceProducts: 0
     })
   }
 
@@ -108,7 +112,7 @@ export class ShoppingCartService {
     this.cartBooks = {
       books: [],
       numberOfProducts: 0,
-      subtotalPrice: 0
+      subtotalPriceProducts: 0
     };
 
     this.products.next(this.cartBooks);
@@ -130,9 +134,9 @@ export class ShoppingCartService {
     return Object.keys(object).find((key) => object[key].title === book.title);
   }
 
-  objectExists(newbook: BookModel):boolean{
-    return Object.values(this.cartBooks?.books).some((book)=> {
-      book.title.includes(newbook.title);
-    })
+  objectExist(newBook: BookModel):boolean{
+    return Object.values(this.cartBooks?.books).some((book)=> 
+      book.title.includes(newBook.title)
+    );
   }
 }

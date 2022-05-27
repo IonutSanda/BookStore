@@ -9,7 +9,8 @@
                 {{book.author}}
             </p>
             <span (click)="emitBook()">
-                <i class="fa-solid fa-xmark"></i>
+                <i class="fas fa fa-xmark"></i>
+            
             </span>
         </div>
         <div *ngIf="!showMore" class="card-details-fade"></div>
@@ -18,7 +19,7 @@
                 <strong>Book Description:</strong>
                 {{book.description}}
             </p>
-        <button class="btn btn-primary" (click)="toggleShowMore()">{{showMore! ? "Hide" : "Read more"}}</button>
+        <button class="btn btn-primary read_more" (click)="toggleShowMore()">{{showMore! ? "Hide" : "Read more"}}</button>
         </div>
         <p>
             <strong>Book Publishing House</strong>

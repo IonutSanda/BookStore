@@ -30,7 +30,7 @@
             (click)="setCurrentBook(bookAsync)">Edit</button>
           </div>
           <button class="btn btn-secondary" (click)="addToCart(bookAsync)">Add To Cart</button>
-          <button class="btn btn-primary">Add to Wishlist</button>
+          <button class="btn btn-primary" (click)="addToWishlist(bookAsync)">Add to Wishlist</button>
           <button class="btn btn-danger" (click)="onDeleteBook()" *ngIf="authSource | async">Delete</button>
         </div>
       </div>
@@ -68,7 +68,7 @@
     <div class="book_description">
       <h3><strong>Description: </strong></h3>
       <p [ngClass]="{'limitTextHeight' : isShowMore}">{{bookAsync.description}}</p>
-      <button type="button" class="btn btn-dark"
+      <button type="button" class="btn btn-dark btn-show-more"
         (click)="showMoreText()">{{isShowMore ? 'Show More' : 'Show Less'}}</button>
     </div>
   </ng-container>

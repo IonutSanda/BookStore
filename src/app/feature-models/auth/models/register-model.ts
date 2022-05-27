@@ -4,7 +4,7 @@ export interface RegisterDataModel{
     email: string;
     userId?: string;
     cart: {
-        subTotalPrice?: Number;
+        subtotalPriceProducts?: Number;
         numberOfProducts?: Number;
     }
 }
