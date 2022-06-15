@@ -15,7 +15,7 @@ export class LoggedInGuard implements CanActivate {
     return this.authService.autoLogin().pipe(
       take(1),
       map((user) => {
-        const isAuth = !(!!Object.keys(user).length);
+        const isAuth = !!Object.keys(user).length;
         if(isAuth){
           return true;
         } 

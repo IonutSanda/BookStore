@@ -22,7 +22,7 @@ const routes: Routes = [
   {
     path: 'myaccount',
     component: ProfileComponent,
-    // canActivate: [LoggedInGuard]
+    canActivate: [LoggedInGuard]
   }
 
 ];
