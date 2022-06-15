@@ -14,6 +14,7 @@ import { AuthModule } from '@angular/fire/auth';
 
 import { CoreModule } from './core/core.module';
 import { ShoppingCartModule } from './feature-models/shopping-cart/shopping-cart.module';
+import { ProfileComponent } from './feature-models/auth/components/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -29,8 +30,8 @@ import { ShoppingCartModule } from './feature-models/shopping-cart/shopping-cart
     FormsModule,
     ReactiveFormsModule,
     ShoppingCartModule,
-    ModalModule.forRoot(),
     AuthModule,
+    ModalModule.forRoot(),
     // AngularFireModule.initializeApp(environment.firebase),
     // AngularFireAuthModule
     // provideFirebaseApp(() => initializeApp(environment.firebase)),

@@ -42,10 +42,10 @@
       <a class="link" routerLink="/auth/register" (click)="toggleAccountMenu()" *ngIf="!isAuthenticated">
         <li class="nav-account-menu-link-register">Register</li>
       </a>
-      <a class="link" (click)="toggleAccountMenu()" *ngIf="isAuthenticated">
+      <a class="link" [routerLink]="['/myaccount']" (click)="toggleAccountMenu()" *ngIf="isAuthenticated">
         <li class="nav-account-menu-link-login">Profile</li>
       </a>
-      <a class="link" (click)="toggleAccountMenu()" *ngIf="isAuthenticated">
+      <a class="link" [routerLink]="['/books']" (click)="toggleAccountMenu()" *ngIf="isAuthenticated">
         <li class="nav-account-menu-link-register" (click)="onLogout()">Logout</li>
       </a>
     </ul>

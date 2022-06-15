@@ -78,6 +78,14 @@ export class AuthService {
     return this.http.get<RegisterDataModel>(getUserByIdUrl);
   }
 
+  getUserId(){
+    const idToken = this.getToken();
+    console.log('idToken auth service')
+    console.log(idToken);
+    this.getUserData(idToken);
+
+  }
+
   createUser(email: string, password: string, userData: RegisterDataModel){
     return defer(async () => {
       const createUser = await this.afAuth.createUserWithEmailAndPassword(

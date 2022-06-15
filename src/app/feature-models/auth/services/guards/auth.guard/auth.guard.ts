@@ -18,11 +18,11 @@ export class AuthGuard implements CanActivate {
       map(user => {
         const isAuth = !!Object.keys(user).length;
         if(!isAuth){
-          return true;
+          return this.router.createUrlTree(['/auth/login']);
         }
-        return this.router.createUrlTree(['/books']);
+        return true;
       })
     );
   }
-  
+
 }

@@ -1,0 +1,89 @@
+<div *ngIf="isLoadingData$ | async" class="spinner-wrapper">
+  <app-book-loader></app-book-loader>
+</div>
+
+
+<div class="container">
+  <!-- First name is the given name -->
+  <div class="header-title">Welcome back, {{user.firstName}}</div>
+  <hr>
+  <form [formGroup]="profileForm" (ngSubmit)="submit()" class="formBody">
+    <label for="firstName">First Name:</label>
+    <div class="form-group input-group">
+      <input formControlName="firstName" name="firstName" id="firstName" type="text" class="form-control"
+        placeholder="First Name" [ngModel]="user.firstName" [ngClass]="{
+                'input-error': 
+                !this.profileForm.controls.firstName.valid &&
+                this.profileForm.controls.firstName.dirty &&
+                this.profileForm.controls.firstName.value
+            }" />
+    </div>
+
+    <div *ngIf="
+                !this.profileForm.controls.firstName.valid &&
+                this.profileForm.controls.firstName.dirty &&
+                this.profileForm.controls.firstName.value" class="input-invalid">
+      First Name can only contains letters!
+    </div>
+    <div *ngIf="
+                this.profileForm.controls.firstName.touched &&
+                this.profileForm.controls.firstName.value == '' " class="input-invalid">
+      Required!
+    </div>
+    <label for="lastName">Last Name:</label>
+    <div class="form-group input-group">
+      <input formControlName="lastName" name="lastName" id="lastName" type="text" class="form-control"
+        placeholder="Last Name" [ngModel]="user.lastName" [ngClass]="{
+                'input-error': 
+                !this.profileForm.controls.lastName.valid &&
+                this.profileForm.controls.lastName.dirty &&
+                this.profileForm.controls.lastName.value
+            }" />
+    </div>
+
+    <div *ngIf="
+                !this.profileForm.controls.lastName.valid &&
+                this.profileForm.controls.lastName.dirty &&
+                this.profileForm.controls.lastName.value" class="input-invalid">
+      Last Name can only contains letters!
+    </div>
+    <div *ngIf="
+                this.profileForm.controls.lastName.touched &&
+                this.profileForm.controls.lastName.value == '' " class="input-invalid">
+      Required!
+    </div>
+    <label for="email">Email:</label>
+    <div class="form-group">
+      <input formControlName="email" name="email" id="email" type="email" class="form-control" placeholder="Email" [ngModel]="user.email" 
+        [ngClass]="{
+                        'input-error':
+                        !this.profileForm.controls.email.valid &&
+                        this.profileForm.controls.email.dirty &&
+                        this.profileForm.controls.email.value
+                    }" />
+    </div>
+    <div class="input-invalid" *ngIf="
+            this.profileForm.controls.email.errors?.pattern &&
+            this.profileForm.controls.email.dirty &&
+            this.profileForm.controls.email.value">
+      Please enter a valid E-mail Address!
+    </div>
+    <div class="input-invalid" *ngIf="
+              this.profileForm.controls.email.touched && 
+              this.profileForm.controls.email.value === '' ">
+      Required!
+    </div>
+    <div class="input-invalid" *ngIf="this.profileForm.controls.email.value === user.email">
+      Email is already used by this account!
+    </div>    
+    <div class="input-invalid" *ngIf="this.profileForm.controls.email.errors?.emailExist && !(this.profileForm.controls.email.value === user.email)">
+      Email is already used by another account!
+    </div>
+    <div class="buttons">
+      <button class="btn btn-success btn-update-information" type="submit"
+        [disabled]="!isValid() || profileForm.status === 'PENDING'">Save</button>
+    
+    <button class="btn btn-success btn-cancel" type="button" [routerLink]="['/books']">Cancel</button>
+    </div>
+  </form>
+</div>
