@@ -1,8 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FirebaseApp } from '@angular/fire/app';
-import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
 import { Observable, switchMap } from 'rxjs';
 import { regex } from 'src/app/constants/regex';
 import { LoadingService } from 'src/app/core/services/utility/loading.service';
@@ -10,6 +7,7 @@ import { ValidatorsService } from 'src/app/shared/components/services/validators
 import { UserModel } from '../../models/user-model';
 import { AuthService } from '../../services/auth.service';
 import { UserService } from '../../services/user.service';
+// import { getAuth } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-profile',
@@ -19,7 +17,7 @@ import { UserService } from '../../services/user.service';
 export class ProfileComponent implements OnInit {
 
   isLoadingData$: Observable < boolean > ;
-  currentUser$: Observable < UserModel > = this.auth.users$;
+  currentUserObs$: Observable < UserModel > = this.auth.users$;
   user: any;
   private userId: string;
 
@@ -41,6 +39,7 @@ export class ProfileComponent implements OnInit {
     this.isLoadingData$ = loadingService.loading$;
   }
 
+  
 
   ngOnInit(): void {
     this.loadingService.show();
@@ -49,7 +48,7 @@ export class ProfileComponent implements OnInit {
   }
 
   getUserData() {
-    this.currentUser$
+    this.currentUserObs$
       .pipe(
         switchMap((data) => {
           this.userId = data.id;
@@ -61,7 +60,7 @@ export class ProfileComponent implements OnInit {
 
   submit() {
     this.userService.updateUserProfile(this.userId, this.profileForm.value)
-      .subscribe(() => console.log('E-mail updated'));
+      .subscribe(() => console.log('E-mail updated'));      
   }
 
   isValid() {
