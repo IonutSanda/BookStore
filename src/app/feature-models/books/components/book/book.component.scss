@@ -11,10 +11,16 @@
     cursor: pointer;
 }
 
+.book_image:hover{
+    transition: transform .2s; 
+    transform: scale(1.5);
+}
+
 img{
     height: 250px;
     width: 200px;
 }
+
 
 a{
     color: black;
