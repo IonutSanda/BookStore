@@ -15,6 +15,8 @@ import { AuthModule } from '@angular/fire/auth';
 import { CoreModule } from './core/core.module';
 import { ShoppingCartModule } from './feature-models/shopping-cart/shopping-cart.module';
 import { ProfileComponent } from './feature-models/auth/components/profile/profile.component';
+import { LoggedInGuard } from './feature-models/auth/services/guards/loggedIn.guard/logged-in.guard';
+import { AuthGuard } from './feature-models/auth/services/guards/auth.guard/auth.guard';
 
 @NgModule({
   declarations: [

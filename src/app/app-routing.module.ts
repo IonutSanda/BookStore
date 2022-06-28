@@ -16,6 +16,7 @@ const routes: Routes = [
   },
   {
     path: 'shoppingcart',
+    canActivate: [LoggedInGuard],
     loadChildren: () =>
       import('./feature-models/shopping-cart/shopping-cart.module').then((m) => m.ShoppingCartModule),
   },

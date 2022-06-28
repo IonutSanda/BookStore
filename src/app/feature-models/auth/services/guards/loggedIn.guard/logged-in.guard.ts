@@ -12,16 +12,17 @@ export class LoggedInGuard implements CanActivate {
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    return this.authService.autoLogin().pipe(
-      take(1),
-      map((user) => {
-        const isAuth = !!Object.keys(user).length;
-        if(isAuth){
-          return true;
-        } 
-        return this.router.createUrlTree(['/books']);
+
+      let boolVal;
+      this.authService.isUserAuthenticated().subscribe((data) => {
+        if(!data){
+          this.router.navigateByUrl('/books');
+          boolVal = false;
+        } else{
+          boolVal = true;
+        }
       })
-    );
+      return boolVal;
   }
   
 }
